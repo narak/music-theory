@@ -7,8 +7,8 @@ import { Select, Layout, /*Statistic,*/ Card } from 'antd';
 import { Notes } from '../constants/NoteConstants';
 import { getMajorScale } from '../utils/scale';
 
-import NotesComponent from './Notes';
-import TriadsComponent from './Triads';
+import Fretboard from './Fretboard';
+import Triads from './Triads';
 
 const { Option } = Select;
 const { Sider, Content } = Layout;
@@ -48,12 +48,12 @@ export default class App extends React.Component {
                             {/*<section className={styles.notes}>
                                 <NotesComponent notes={reindexedNotes} selectedNotes={scaleNotes} />
                             </section>*/}
-                            <section className={styles.notes}>
-                                <NotesComponent notes={Notes} selectedNotes={scaleNotes} />
+                            <section>
+                                <Fretboard selectedNotes={scaleNotes} />
                             </section>
                             <section className={styles.info}>
                                 <Card title="Triads">
-                                    <TriadsComponent scale={scaleNotes} />
+                                    <Triads scale={scaleNotes} />
                                 </Card>
                             </section>
                         </Content>

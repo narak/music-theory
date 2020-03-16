@@ -9,24 +9,20 @@
     text-align: center;
     line-height: 30px;
     background: #fff;
-    margin: 5px;
-    border-radius: 4px;
+    box-shadow: 0 0 1px #000;
 }
 
 .noteActive {
-    border: 1px solid hsl(247, 100%, 85%);
-    background: hsl(247, 100%, 90%);
-    box-shadow: 1px 1px 4px hsl(247, 100%, 87%);
+    /*border: 1px solid hsl(247, 100%, 90%);*/
+    background: hsl(247, 100%, 95%);
 }
 
 .noteRoot {
-    border: 1px solid hsl(64, 100%, 85%);
+    /*border: 1px solid hsl(64, 100%, 85%);*/
     background: hsl(64, 100%, 90%);
-    box-shadow: 1px 1px 4px hsl(64, 100%, 87%);
 }
 
 .noteRelativeMinor {
-    border: 1px solid hsl(316, 100%, 85%);
+    /*border: 1px solid hsl(316, 100%, 85%);*/
     background: hsl(316, 100%, 90%);
-    box-shadow: 1px 1px 4px hsl(316, 100%, 87%);
 }

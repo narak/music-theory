@@ -15,7 +15,7 @@ import { MajorScaleIntervals, MinorKeyNoteIndex } from '../constants/ScaleConsta
  */
 export default function Notes({ notes, selectedNotes }) {
     return (
-        <section className={styles.notes}>
+        <div className={styles.notes}>
             {notes.map(note => {
                 const index = selectedNotes.indexOf(note);
                 const isRelativeMinor = index === MinorKeyNoteIndex;
@@ -27,6 +27,8 @@ export default function Notes({ notes, selectedNotes }) {
 
                     if (isRelativeMinor) {
                         tooltip += ', Relative Minor';
+                    } else if (index === 0) {
+                        tooltip = 'Root';
                     }
                 }
 
@@ -45,6 +47,6 @@ export default function Notes({ notes, selectedNotes }) {
                     </Tooltip>
                 );
             })}
-        </section>
+        </div>
     );
 }
