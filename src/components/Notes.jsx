@@ -1,0 +1,50 @@
+import styles from './notes.cssm';
+
+import React from 'react';
+import cns from 'classnames';
+
+import { Tooltip } from 'antd';
+
+import { MajorScaleIntervals, MinorKeyNoteIndex } from '../constants/ScaleConstants';
+
+/**
+ * [Notes description]
+ * @param {[type]} options.notes         [description]
+ * @param {[type]} options.selectedNotes [description]
+ * @returns {[type]} [description]
+ */
+export default function Notes({ notes, selectedNotes }) {
+    return (
+        <section className={styles.notes}>
+            {notes.map(note => {
+                const index = selectedNotes.indexOf(note);
+                const isRelativeMinor = index === MinorKeyNoteIndex;
+                const isActive = index > -1;
+
+                let tooltip;
+                if (isActive) {
+                    tooltip = MajorScaleIntervals[index];
+
+                    if (isRelativeMinor) {
+                        tooltip += ', Relative Minor';
+                    }
+                }
+
+                return (
+                    <Tooltip key={note} title={tooltip}>
+                        <div
+                            key={note}
+                            className={cns(styles.note, {
+                                [styles.noteActive]: isActive,
+                                [styles.noteRelativeMinor]: isRelativeMinor,
+                                [styles.noteRoot]: index === 0,
+                            })}
+                        >
+                            {note}
+                        </div>
+                    </Tooltip>
+                );
+            })}
+        </section>
+    );
+}

@@ -1,0 +1,30 @@
+:global(html),
+:global(body) {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-family: 'Montserrat', serif;
+}
+
+.app {
+    margin: 20px;
+    padding: 20px;
+}
+
+.app:focus {
+    outline: 1px solid #f0f0f0;
+}
+
+:global(*),
+:global(* *) {
+    box-sizing: border-box;
+}
+
+.scaleContainer section {
+    padding: 10px;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
