@@ -31,6 +31,10 @@ const config = {
         },
     },
 
+    watchOptions: {
+        ignored: /node_modules/
+    },
+
     module: {
         rules: [
             {
