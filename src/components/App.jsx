@@ -9,6 +9,7 @@ import { getMajorScale } from '../utils/scale';
 
 import Fretboard from './Fretboard';
 import Triads from './Triads';
+import Sevenths from './Sevenths';
 
 const { Option } = Select;
 const { Sider, Content } = Layout;
@@ -54,6 +55,9 @@ export default class App extends React.Component {
                             <section className={styles.info}>
                                 <Card title="Triads">
                                     <Triads scale={scaleNotes} />
+                                </Card>
+                                <Card title="7ths">
+                                    <Sevenths scale={scaleNotes} />
                                 </Card>
                             </section>
                         </Content>

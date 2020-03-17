@@ -1,32 +1,33 @@
-import styles from './triads.cssm';
+import styles from './sevenths.cssm';
 
 import React from 'react';
 import { MajorScaleSteps } from '../constants/ScaleConstants';
 
-import { getTriadType } from '../utils/chords';
+import { getSeventhType } from '../utils/chords';
 
 /**
  * [Traid description]
  * @param {[type]} options.scale [description]
  * @returns {[type]} [description]
  */
-export default function Triads({ scale }) {
+export default function Sevenths({ scale }) {
     return (
         <div>
             {Array(MajorScaleSteps.length)
                 .fill()
                 .map((_, index) => {
-                    const triad = [
+                    const seventh = [
                         scale[index % scale.length],
                         scale[(index + 2) % scale.length],
                         scale[(index + 4) % scale.length],
+                        scale[(index + 6) % scale.length],
                     ];
                     return (
-                        <div key={index} className={styles.triad}>
-                            <span className={styles.triadNotes}>{triad.join(' - ')}</span>
+                        <div key={index} className={styles.seventh}>
+                            <span className={styles.seventhNotes}>{seventh.join(' - ')}</span>
                             is
                             <span>
-                                {triad[0]} {getTriadType(triad)}
+                                {seventh[0]} {getSeventhType(seventh)}
                             </span>
                         </div>
                     );

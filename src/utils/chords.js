@@ -41,3 +41,33 @@ export function getTriadType(triad) {
 
     return typeof currentType === 'string' ? currentType : undefined;
 }
+
+/**
+ * [getTriadType description]
+ * @param  {[type]} seventh [description]
+ * @return {[type]}       [description]
+ */
+export function getSeventhType(seventh) {
+    const majorScale = getMajorScale(seventh[0]);
+    let currentType;
+
+    let index = Notes.indexOf(seventh[1]);
+    if (index === majorScale.indexes[2]) {
+        currentType = Types[3];
+    } else if (index === majorScale.indexes[2] - 1) {
+        currentType = Types.b3;
+    }
+
+    if (currentType) {
+        index = Notes.indexOf(seventh[2]);
+        if (index === majorScale.indexes[4]) {
+            currentType = currentType[5];
+        } else if (index === majorScale.indexes[4] - 1) {
+            currentType = currentType.b5;
+        } else if (index === majorScale.indexes[4]) {
+            currentType = currentType['#5'];
+        }
+    }
+
+    return typeof currentType === 'string' ? currentType : undefined;
+}
