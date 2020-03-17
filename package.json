@@ -30,7 +30,7 @@
         "webpack-dev-server": "^3.10.3"
     },
     "scripts": {
-        "start": "PUBLIC_PATH='' webpack-dev-server --config config/webpack.config.js",
+        "start": "PUBLIC_PATH='' webpack-dev-server --config config/webpack.config.js --hot",
         "build": "webpack --config config/webpack.config.js",
         "build:dev": "PUBLIC_PATH='' webpack --config config/webpack.config.js"
     }
