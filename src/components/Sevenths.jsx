@@ -27,7 +27,7 @@ export default function Sevenths({ scale }) {
                             <span className={styles.seventhNotes}>{seventh.join(' - ')}</span>
                             is
                             <span>
-                                {seventh[0]} {getSeventhType(seventh)}
+                                {seventh[0]}{getSeventhType(seventh)}
                             </span>
                         </div>
                     );

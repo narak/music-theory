@@ -26,7 +26,7 @@ export default function Triads({ scale }) {
                             <span className={styles.triadNotes}>{triad.join(' - ')}</span>
                             is
                             <span>
-                                {triad[0]} {getTriadType(triad)}
+                                {triad[0]}{getTriadType(triad)}
                             </span>
                         </div>
                     );

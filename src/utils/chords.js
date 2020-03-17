@@ -3,12 +3,12 @@ import { Notes } from '../constants/NoteConstants';
 
 const TriadTypes = {
     3: {
-        5: 'Major',
-        '#5': 'Augmented',
+        5: 'maj',
+        '#5': 'aug',
     },
     b3: {
-        5: 'Minor',
-        b5: 'Diminished',
+        5: 'min',
+        b5: 'dim',
     },
 };
 
@@ -22,10 +22,10 @@ export function getTriadType(triad) {
     let currentType;
 
     let index = Notes.indexOf(triad[1]);
-    // Major 3rd
+    // Maj 3rd
     if (index === majorScale.indexes[2]) {
         currentType = TriadTypes[3];
-    // Minor 3rd
+    // Min 3rd
     } else if (index === majorScale.indexes[2] - 1) {
         currentType = TriadTypes.b3;
     }
@@ -35,10 +35,10 @@ export function getTriadType(triad) {
         // Perfect 5th
         if (index === majorScale.indexes[4]) {
             currentType = currentType[5];
-        // Diminished 5th
+        // Dim 5th
         } else if (index === majorScale.indexes[4] - 1) {
             currentType = currentType.b5;
-        // Augmented 5th
+        // Aug 5th
         } else if (index === majorScale.indexes[4] + 1) {
             currentType = currentType['#5'];
         }
@@ -50,17 +50,17 @@ export function getTriadType(triad) {
 const SeventhTypes = {
     3: {
         5: {
-            7: 'Major 7',
+            7: 'maj7',
             b7: '7 or Dominant 7',
         },
     },
     b3: {
         5: {
-            b7: 'Minor 7',
+            b7: 'min7',
         },
         b5: {
-            b7: 'Minor 7 b5 or Half Diminished',
-            bb7: 'Minor 7 bb5 or Full Diminished',
+            b7: 'min7b5 or Half Dim',
+            bb7: 'min7bb5 or Full Dim',
         },
     },
 };
@@ -75,10 +75,10 @@ export function getSeventhType(seventh) {
     let currentType;
 
     let index = Notes.indexOf(seventh[1]);
-    // Major 3rd
+    // Maj 3rd
     if (index === majorScale.indexes[2]) {
         currentType = SeventhTypes[3];
-    // Minor 3rd
+    // Min 3rd
     } else if (index === majorScale.indexes[2] - 1) {
         currentType = SeventhTypes.b3;
     }
@@ -88,7 +88,7 @@ export function getSeventhType(seventh) {
         // Perfect 5th
         if (index === majorScale.indexes[4]) {
             currentType = currentType[5];
-        // Diminished 5th
+        // Dim 5th
         } else if (index === majorScale.indexes[4] - 1) {
             currentType = currentType.b5;
         }
@@ -96,10 +96,10 @@ export function getSeventhType(seventh) {
 
     if (currentType) {
         index = Notes.indexOf(seventh[3]);
-        // Major 7th
+        // Maj 7th
         if (index === majorScale.indexes[6]) {
             currentType = currentType[7];
-        // Minor 7th
+        // Min 7th
         } else if (index === majorScale.indexes[6] - 1) {
             currentType = currentType.b7;
         // Double flat 7th
