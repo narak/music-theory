@@ -4,7 +4,7 @@ import React from 'react';
 import { Tooltip } from 'antd';
 
 import { MajorScaleSteps } from '../constants/ScaleConstants';
-import { getSeventhType } from '../utils/chords';
+import { getSeventhName } from '../utils/chords';
 
 /**
  * [Traid description]
@@ -24,15 +24,15 @@ export default function Sevenths({ scale }) {
                         scale[(index + 6) % scale.length],
                     ];
 
-                    const seventhType = getSeventhType(seventh);
+                    const seventhName = getSeventhName(seventh);
 
                     return (
                         <div key={index} className={styles.seventh}>
                             <span className={styles.seventhNotes}>{seventh.join(' - ')}</span>
                             is
-                            <Tooltip title={seventhType && seventhType.keys.join(' - ')}>
+                            <Tooltip title={seventhName && seventhName.keys.join(' - ')}>
                                 {seventh[0]}
-                                {seventhType && seventhType.type}
+                                {seventhName && seventhName.type}
                             </Tooltip>
                         </div>
                     );

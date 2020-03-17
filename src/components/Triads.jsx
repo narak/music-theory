@@ -4,7 +4,7 @@ import React from 'react';
 import { Tooltip } from 'antd';
 
 import { MajorScaleSteps } from '../constants/ScaleConstants';
-import { getTriadType } from '../utils/chords';
+import { getTriadName } from '../utils/chords';
 
 /**
  * [Traid description]
@@ -22,15 +22,15 @@ export default function Triads({ scale }) {
                         scale[(index + 2) % scale.length],
                         scale[(index + 4) % scale.length],
                     ];
-                    const triadType = getTriadType(triad);
+                    const triadName = getTriadName(triad);
 
                     return (
                         <div key={index} className={styles.triad}>
                             <span className={styles.triadNotes}>{triad.join(' - ')}</span>
                             is
-                            <Tooltip title={triadType && triadType.keys.join(' - ')}>
+                            <Tooltip title={triadName && triadName.keys.join(' - ')}>
                                 {triad[0]}
-                                {triadType && triadType.type}
+                                {triadName && triadName.type}
                             </Tooltip>
                         </div>
                     );
