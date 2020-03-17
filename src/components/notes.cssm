@@ -1,7 +1,6 @@
 .notes {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    font-weight: 600;
     font-size: 16px;
 }
 
@@ -19,7 +18,8 @@
 
 .noteRoot {
     /*border: 1px solid hsl(64, 100%, 85%);*/
-    background: hsl(64, 100%, 90%);
+    font-weight: 600;
+    background: hsl(64, 100%, 92%);
 }
 
 .noteRelativeMinor {
