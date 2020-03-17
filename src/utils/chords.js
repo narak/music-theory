@@ -3,7 +3,7 @@ import { Notes } from '../constants/NoteConstants';
 
 const TriadTypes = {
     3: {
-        5: 'maj',
+        5: 'Maj',
         '#5': 'aug',
     },
     b3: {
@@ -19,15 +19,18 @@ const TriadTypes = {
  */
 export function getTriadType(triad) {
     const majorScale = getMajorScale(triad[0]);
+    const keys = [1];
     let currentType;
 
     let index = Notes.indexOf(triad[1]);
     // Maj 3rd
     if (index === majorScale.indexes[2]) {
         currentType = TriadTypes[3];
-    // Min 3rd
+        keys.push(3);
+        // Min 3rd
     } else if (index === majorScale.indexes[2] - 1) {
         currentType = TriadTypes.b3;
+        keys.push('b3');
     }
 
     if (currentType) {
@@ -35,23 +38,26 @@ export function getTriadType(triad) {
         // Perfect 5th
         if (index === majorScale.indexes[4]) {
             currentType = currentType[5];
-        // Dim 5th
+            keys.push('5');
+            // Dim 5th
         } else if (index === majorScale.indexes[4] - 1) {
             currentType = currentType.b5;
-        // Aug 5th
+            keys.push('b5');
+            // Aug 5th
         } else if (index === majorScale.indexes[4] + 1) {
             currentType = currentType['#5'];
+            keys.push('#5');
         }
     }
 
-    return typeof currentType === 'string' ? currentType : undefined;
+    return typeof currentType === 'string' ? { type: currentType, keys } : undefined;
 }
 
 const SeventhTypes = {
     3: {
         5: {
-            7: 'maj7',
-            b7: '7 or Dominant 7',
+            7: 'Maj7',
+            b7: '7 or Dom7',
         },
     },
     b3: {
@@ -72,15 +78,18 @@ const SeventhTypes = {
  */
 export function getSeventhType(seventh) {
     const majorScale = getMajorScale(seventh[0]);
+    const keys = [1];
     let currentType;
 
     let index = Notes.indexOf(seventh[1]);
     // Maj 3rd
     if (index === majorScale.indexes[2]) {
         currentType = SeventhTypes[3];
-    // Min 3rd
+        keys.push(3);
+        // Min 3rd
     } else if (index === majorScale.indexes[2] - 1) {
         currentType = SeventhTypes.b3;
+        keys.push('b3');
     }
 
     if (currentType) {
@@ -88,9 +97,11 @@ export function getSeventhType(seventh) {
         // Perfect 5th
         if (index === majorScale.indexes[4]) {
             currentType = currentType[5];
-        // Dim 5th
+            keys.push(5);
+            // Dim 5th
         } else if (index === majorScale.indexes[4] - 1) {
             currentType = currentType.b5;
+            keys.push('b5');
         }
     }
 
@@ -99,14 +110,17 @@ export function getSeventhType(seventh) {
         // Maj 7th
         if (index === majorScale.indexes[6]) {
             currentType = currentType[7];
-        // Min 7th
+            keys.push(7);
+            // Min 7th
         } else if (index === majorScale.indexes[6] - 1) {
             currentType = currentType.b7;
-        // Double flat 7th
+            keys.push('b7');
+            // Double flat 7th
         } else if (index === majorScale.indexes[6] - 2) {
             currentType = currentType.bb7;
+            keys.push('bb7');
         }
     }
 
-    return typeof currentType === 'string' ? currentType : undefined;
+    return typeof currentType === 'string' ? { type: currentType, keys } : undefined;
 }

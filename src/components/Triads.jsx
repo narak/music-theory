@@ -1,8 +1,9 @@
 import styles from './triads.cssm';
 
 import React from 'react';
-import { MajorScaleSteps } from '../constants/ScaleConstants';
+import { Tooltip } from 'antd';
 
+import { MajorScaleSteps } from '../constants/ScaleConstants';
 import { getTriadType } from '../utils/chords';
 
 /**
@@ -21,13 +22,16 @@ export default function Triads({ scale }) {
                         scale[(index + 2) % scale.length],
                         scale[(index + 4) % scale.length],
                     ];
+                    const triadType = getTriadType(triad);
+
                     return (
                         <div key={index} className={styles.triad}>
                             <span className={styles.triadNotes}>{triad.join(' - ')}</span>
                             is
-                            <span>
-                                {triad[0]}{getTriadType(triad)}
-                            </span>
+                            <Tooltip title={triadType && triadType.keys.join(' - ')}>
+                                {triad[0]}
+                                {triadType && triadType.type}
+                            </Tooltip>
                         </div>
                     );
                 })}

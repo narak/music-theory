@@ -1,8 +1,9 @@
 import styles from './sevenths.cssm';
 
 import React from 'react';
-import { MajorScaleSteps } from '../constants/ScaleConstants';
+import { Tooltip } from 'antd';
 
+import { MajorScaleSteps } from '../constants/ScaleConstants';
 import { getSeventhType } from '../utils/chords';
 
 /**
@@ -22,13 +23,17 @@ export default function Sevenths({ scale }) {
                         scale[(index + 4) % scale.length],
                         scale[(index + 6) % scale.length],
                     ];
+
+                    const seventhType = getSeventhType(seventh);
+
                     return (
                         <div key={index} className={styles.seventh}>
                             <span className={styles.seventhNotes}>{seventh.join(' - ')}</span>
                             is
-                            <span>
-                                {seventh[0]}{getSeventhType(seventh)}
-                            </span>
+                            <Tooltip title={seventhType && seventhType.keys.join(' - ')}>
+                                {seventh[0]}
+                                {seventhType && seventhType.type}
+                            </Tooltip>
                         </div>
                     );
                 })}
