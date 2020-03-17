@@ -1,6 +1,8 @@
 import styles from './app.cssm';
 
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
+
 // import cns from 'classNames';
 import { Select, Layout, /*Statistic,*/ Card } from 'antd';
 
@@ -14,7 +16,7 @@ import Sevenths from './Sevenths';
 const { Option } = Select;
 const { Sider, Content } = Layout;
 
-export default class App extends React.Component {
+class App extends React.Component {
     state = {
         selectedKey: Notes[0],
     };
@@ -71,3 +73,5 @@ export default class App extends React.Component {
         this.setState({ selectedKey });
     };
 }
+
+export default hot(App);

@@ -15,7 +15,7 @@ console.log('Setting JS Static Path to:', staticPath);
 const config = {
     mode: isProdBuild ? 'production' : 'development',
 
-    entry: path.join(__dirname, '../src/index.js'),
+    entry: ['react-hot-loader/patch', path.join(__dirname, '../src/index.js')],
 
     output: {
         path: path.resolve(__dirname, '../static', 'build'),
