@@ -30,15 +30,39 @@ const BNotes = getStringNotes('B');
  * @param {[type]} options.selectedNotes [description]
  * @returns {[type]} [description]
  */
-export default function Fretboard({ selectedNotes }) {
+export default function Fretboard({ selectedNotes, highlightedNotes }) {
     return (
         <div>
-            <NotesComponent notes={ENotes} selectedNotes={selectedNotes} />
-            <NotesComponent notes={BNotes} selectedNotes={selectedNotes} />
-            <NotesComponent notes={GNotes} selectedNotes={selectedNotes} />
-            <NotesComponent notes={DNotes} selectedNotes={selectedNotes} />
-            <NotesComponent notes={ANotes} selectedNotes={selectedNotes} />
-            <NotesComponent notes={ENotes} selectedNotes={selectedNotes} />
+            <NotesComponent
+                notes={ENotes}
+                selectedNotes={selectedNotes}
+                highlightedNotes={highlightedNotes}
+            />
+            <NotesComponent
+                notes={BNotes}
+                selectedNotes={selectedNotes}
+                highlightedNotes={highlightedNotes}
+            />
+            <NotesComponent
+                notes={GNotes}
+                selectedNotes={selectedNotes}
+                highlightedNotes={highlightedNotes}
+            />
+            <NotesComponent
+                notes={DNotes}
+                selectedNotes={selectedNotes}
+                highlightedNotes={highlightedNotes}
+            />
+            <NotesComponent
+                notes={ANotes}
+                selectedNotes={selectedNotes}
+                highlightedNotes={highlightedNotes}
+            />
+            <NotesComponent
+                notes={ENotes}
+                selectedNotes={selectedNotes}
+                highlightedNotes={highlightedNotes}
+            />
         </div>
     );
 }

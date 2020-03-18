@@ -19,10 +19,11 @@ const { Sider, Content } = Layout;
 class App extends React.Component {
     state = {
         selectedKey: Notes[0],
+        highlightedNotes: undefined,
     };
 
     render() {
-        const { selectedKey } = this.state;
+        const { selectedKey, highlightedNotes } = this.state;
         const { notes: scaleNotes } = getMajorScale(selectedKey);
 
         const selKeyIndex = Notes.indexOf(selectedKey);
@@ -48,17 +49,32 @@ class App extends React.Component {
                         </Sider>
                         <Content className={styles.scaleContainer}>
                             <section className={styles.notes}>
-                                <NotesComponent notes={reindexedNotes} selectedNotes={scaleNotes} />
+                                <NotesComponent
+                                    notes={reindexedNotes}
+                                    selectedNotes={scaleNotes}
+                                    highlightedNotes={highlightedNotes}
+                                />
                             </section>
                             <section>
-                                <Fretboard selectedNotes={scaleNotes} />
+                                <Fretboard
+                                    selectedNotes={scaleNotes}
+                                    highlightedNotes={highlightedNotes}
+                                />
                             </section>
                             <section className={styles.info}>
                                 <Card title="Triads">
-                                    <Triads scale={scaleNotes} />
+                                    <Triads
+                                        scale={scaleNotes}
+                                        highlightedNotes={highlightedNotes}
+                                        onSelect={this.onSelectHighlightedNotes}
+                                    />
                                 </Card>
                                 <Card title="7ths">
-                                    <Sevenths scale={scaleNotes} />
+                                    <Sevenths
+                                        scale={scaleNotes}
+                                        highlightedNotes={highlightedNotes}
+                                        onSelect={this.onSelectHighlightedNotes}
+                                    />
                                 </Card>
                             </section>
                         </Content>
@@ -70,6 +86,10 @@ class App extends React.Component {
 
     onChangeKey = selectedKey => {
         this.setState({ selectedKey });
+    };
+
+    onSelectHighlightedNotes = highlightedNotes => {
+        this.setState({ highlightedNotes });
     };
 }
 

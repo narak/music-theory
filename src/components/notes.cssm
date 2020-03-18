@@ -11,18 +11,22 @@
     box-shadow: 0 0 1px #000;
 }
 
-.noteActive {
-    /*border: 1px solid hsl(247, 100%, 90%);*/
+.active {
+    border: 1px solid hsl(247, 100%, 95%);
     background: hsl(247, 100%, 95%);
 }
 
-.noteRoot {
-    /*border: 1px solid hsl(64, 100%, 85%);*/
-    font-weight: 600;
+.root {
+    border: 1px solid hsl(64, 100%, 92%);
     background: hsl(64, 100%, 92%);
+    font-weight: 600;
 }
 
-.noteRelativeMinor {
-    /*border: 1px solid hsl(316, 100%, 85%);*/
+.relativeMinor {
+    border: 1px solid hsl(316, 100%, 90%);
     background: hsl(316, 100%, 90%);
+}
+
+.highlight {
+    border: 1px solid hsl(247, 100%, 25%);
 }

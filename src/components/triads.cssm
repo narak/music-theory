@@ -1,9 +1,0 @@
-.triad {
-    display: grid;
-    grid-template-columns: 85px 10px 1fr;
-    grid-gap: 10px;
-}
-
-.triadNotes {
-    text-align: right;
-}

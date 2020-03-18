@@ -1,17 +1,19 @@
-import styles from './sevenths.cssm';
+import styles from './chords.cssm';
 
 import React from 'react';
+import cns from 'classnames';
+
 import { Tooltip } from 'antd';
 
 import { MajorScaleSteps } from '../constants/ScaleConstants';
-import { getSeventhName } from '../utils/chords';
+import { getSeventhName, isEqual } from '../utils/chords';
 
 /**
  * [Traid description]
  * @param {[type]} options.scale [description]
  * @returns {[type]} [description]
  */
-export default function Sevenths({ scale }) {
+export default function Sevenths({ scale, highlightedNotes, onSelect }) {
     return (
         <div>
             {Array(MajorScaleSteps.length)
@@ -27,10 +29,19 @@ export default function Sevenths({ scale }) {
                     const seventhName = getSeventhName(seventh);
 
                     return (
-                        <div key={index} className={styles.seventh}>
-                            <span className={styles.seventhNotes}>{seventh.join(' - ')}</span>
+                        <div
+                            key={index}
+                            className={cns(styles.chord, styles.chordSeventh, {
+                                [styles.active]: isEqual(seventh, highlightedNotes),
+                            })}
+                            onClick={onSelect.bind(this, seventh)}
+                        >
+                            <span className={styles.chordNotes}>{seventh.join(' - ')}</span>
                             is
-                            <Tooltip title={seventhName && seventhName.keys.join(' - ')}>
+                            <Tooltip
+                                title={seventhName && seventhName.keys.join(' - ')}
+                                placement="right"
+                            >
                                 {seventh[0]}
                                 {seventhName && seventhName.type}
                             </Tooltip>

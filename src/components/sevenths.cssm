@@ -1,9 +1,0 @@
-.seventh {
-    display: grid;
-    grid-template-columns: 120px 10px 1fr;
-    grid-gap: 10px;
-}
-
-.seventhNotes {
-    text-align: right;
-}

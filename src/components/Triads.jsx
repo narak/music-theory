@@ -1,17 +1,18 @@
-import styles from './triads.cssm';
+import styles from './chords.cssm';
 
 import React from 'react';
+import cns from 'classnames';
 import { Tooltip } from 'antd';
 
 import { MajorScaleSteps } from '../constants/ScaleConstants';
-import { getTriadName } from '../utils/chords';
+import { getTriadName, isEqual } from '../utils/chords';
 
 /**
  * [Traid description]
  * @param {[type]} options.scale [description]
  * @returns {[type]} [description]
  */
-export default function Triads({ scale }) {
+export default function Triads({ scale, highlightedNotes, onSelect }) {
     return (
         <div>
             {Array(MajorScaleSteps.length)
@@ -25,10 +26,19 @@ export default function Triads({ scale }) {
                     const triadName = getTriadName(triad);
 
                     return (
-                        <div key={index} className={styles.triad}>
-                            <span className={styles.triadNotes}>{triad.join(' - ')}</span>
+                        <div
+                            key={index}
+                            className={cns(styles.chord, {
+                                [styles.active]: isEqual(triad, highlightedNotes),
+                            })}
+                            onClick={onSelect.bind(this, triad)}
+                        >
+                            <span className={styles.chordNotes}>{triad.join(' - ')}</span>
                             is
-                            <Tooltip title={triadName && triadName.keys.join(' - ')}>
+                            <Tooltip
+                                title={triadName && triadName.keys.join(' - ')}
+                                placement="right"
+                            >
                                 {triad[0]}
                                 {triadName && triadName.type}
                             </Tooltip>

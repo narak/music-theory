@@ -13,7 +13,7 @@ import { MajorScaleIntervals, MinorKeyNoteIndex } from '../constants/ScaleConsta
  * @param {[type]} options.selectedNotes [description]
  * @returns {[type]} [description]
  */
-export default function Notes({ notes, selectedNotes }) {
+export default function Notes({ notes, selectedNotes, highlightedNotes }) {
     return (
         <div className={styles.notes}>
             {notes.map(note => {
@@ -37,9 +37,10 @@ export default function Notes({ notes, selectedNotes }) {
                         <div
                             key={note}
                             className={cns(styles.note, {
-                                [styles.noteActive]: isActive,
-                                [styles.noteRelativeMinor]: isRelativeMinor,
-                                [styles.noteRoot]: index === 0,
+                                [styles.active]: isActive,
+                                [styles.relativeMinor]: isRelativeMinor,
+                                [styles.highlight]: highlightedNotes.indexOf(note) > -1,
+                                [styles.root]: index === 0,
                             })}
                         >
                             {note}
