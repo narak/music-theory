@@ -1,6 +1,19 @@
 import { getMajorScale } from './scale';
 import { Notes } from '../constants/NoteConstants';
 
+/**
+ * Converts  indexes into length - index.
+ * e.g. if val === -1, the return value should be Notes.length - 1
+ *      if val === -2, the return value should be Notes.length - 2
+ *      if val === 13, the return value should be 13 - Notes.length
+ *      if val === 8, the return value should be 8
+ * @param  {Number} val The index value
+ * @return {Number}     The circular index
+ */
+function getCircularIndex(val) {
+    return Math.abs((val + Notes.length) % Notes.length);
+}
+
 const TriadNames = {
     3: {
         5: 'Maj',
@@ -28,7 +41,7 @@ export function getTriadName(triad) {
         currentName = TriadNames[3];
         keys.push(3);
         // Min 3rd
-    } else if (index === majorScale.indexes[2] - 1) {
+    } else if (index === getCircularIndex(majorScale.indexes[2] - 1)) {
         currentName = TriadNames.b3;
         keys.push('b3');
     }
@@ -40,11 +53,11 @@ export function getTriadName(triad) {
             currentName = currentName[5];
             keys.push('5');
             // Dim 5th
-        } else if (index === majorScale.indexes[4] - 1) {
+        } else if (index === getCircularIndex(majorScale.indexes[4] - 1)) {
             currentName = currentName.b5;
             keys.push('b5');
             // Aug 5th
-        } else if (index === majorScale.indexes[4] + 1) {
+        } else if (index === getCircularIndex(majorScale.indexes[4] + 1)) {
             currentName = currentName['#5'];
             keys.push('#5');
         }
@@ -87,7 +100,7 @@ export function getSeventhName(seventh) {
         currentName = SeventhNames[3];
         keys.push(3);
         // Min 3rd
-    } else if (index === majorScale.indexes[2] - 1) {
+    } else if (index === getCircularIndex(majorScale.indexes[2] - 1)) {
         currentName = SeventhNames.b3;
         keys.push('b3');
     }
@@ -99,7 +112,7 @@ export function getSeventhName(seventh) {
             currentName = currentName[5];
             keys.push(5);
             // Dim 5th
-        } else if (index === majorScale.indexes[4] - 1) {
+        } else if (index === getCircularIndex(majorScale.indexes[4] - 1)) {
             currentName = currentName.b5;
             keys.push('b5');
         }
@@ -112,11 +125,11 @@ export function getSeventhName(seventh) {
             currentName = currentName[7];
             keys.push(7);
             // Min 7th
-        } else if (index === majorScale.indexes[6] - 1) {
+        } else if (index === getCircularIndex(majorScale.indexes[6] - 1)) {
             currentName = currentName.b7;
             keys.push('b7');
             // Double flat 7th
-        } else if (index === majorScale.indexes[6] - 2) {
+        } else if (index === getCircularIndex(majorScale.indexes[6] - 2)) {
             currentName = currentName.bb7;
             keys.push('bb7');
         }
