@@ -3,12 +3,12 @@ import styles from './app.cssm';
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
 
-// import cns from 'classNames';
 import { Select, Layout, /*Statistic,*/ Card } from 'antd';
 
 import { Notes } from '../constants/NoteConstants';
 import { getMajorScale } from '../utils/scale';
 
+import NotesComponent from './Notes';
 import Fretboard from './Fretboard';
 import Triads from './Triads';
 import Sevenths from './Sevenths';
@@ -23,11 +23,10 @@ class App extends React.Component {
 
     render() {
         const { selectedKey } = this.state;
-
-        // const selKeyIndex = Notes.indexOf(selectedKey);
-        // const reindexedNotes = Notes.slice(selKeyIndex).concat(Notes.slice(0, selKeyIndex));
-
         const { notes: scaleNotes } = getMajorScale(selectedKey);
+
+        const selKeyIndex = Notes.indexOf(selectedKey);
+        const reindexedNotes = Notes.slice(selKeyIndex).concat(Notes.slice(0, selKeyIndex));
 
         return (
             <div className={styles.app}>
@@ -48,9 +47,9 @@ class App extends React.Component {
                             </Select>
                         </Sider>
                         <Content className={styles.scaleContainer}>
-                            {/*<section className={styles.notes}>
+                            <section className={styles.notes}>
                                 <NotesComponent notes={reindexedNotes} selectedNotes={scaleNotes} />
-                            </section>*/}
+                            </section>
                             <section>
                                 <Fretboard selectedNotes={scaleNotes} />
                             </section>
