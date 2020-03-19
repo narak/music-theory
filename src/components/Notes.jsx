@@ -39,7 +39,7 @@ export default function Notes({ notes, selectedNotes, highlightedNotes }) {
                             className={cns(styles.note, {
                                 [styles.active]: isActive,
                                 [styles.relativeMinor]: isRelativeMinor,
-                                [styles.highlight]: highlightedNotes.indexOf(note) > -1,
+                                [styles.highlight]: highlightedNotes && highlightedNotes.indexOf(note) > -1,
                                 [styles.root]: index === 0,
                             })}
                         >

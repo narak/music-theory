@@ -14,7 +14,7 @@ import Triads from './Triads';
 import Sevenths from './Sevenths';
 
 const { Option } = Select;
-const { Sider, Content } = Layout;
+const { Content } = Layout;
 
 class App extends React.Component {
     state = {
@@ -33,7 +33,7 @@ class App extends React.Component {
             <div className={styles.app}>
                 <div>
                     <Layout>
-                        <Sider style={{ padding: '10px' }}>
+                        <Content style={{ padding: '10px' }}>
                             <Select
                                 name="selectedKey"
                                 value={selectedKey}
@@ -46,36 +46,47 @@ class App extends React.Component {
                                     </Option>
                                 ))}
                             </Select>
-                        </Sider>
+                        </Content>
                         <Content className={styles.scaleContainer}>
                             <section className={styles.notes}>
-                                <NotesComponent
-                                    notes={reindexedNotes}
-                                    selectedNotes={scaleNotes}
-                                    highlightedNotes={highlightedNotes}
-                                />
+                                <strong>Rooted Scale</strong>
+                                <div className={styles.scroll}>
+                                    <NotesComponent
+                                        notes={reindexedNotes}
+                                        selectedNotes={scaleNotes}
+                                        highlightedNotes={highlightedNotes}
+                                    />
+                                </div>
                             </section>
                             <section>
-                                <Fretboard
-                                    selectedNotes={scaleNotes}
-                                    highlightedNotes={highlightedNotes}
-                                />
+                                <strong>Fretboard</strong>
+                                <div className={styles.scroll}>
+                                    <Fretboard
+                                        selectedNotes={scaleNotes}
+                                        highlightedNotes={highlightedNotes}
+                                    />
+                                </div>
                             </section>
-                            <section className={styles.info}>
-                                <Card title="Triads">
-                                    <Triads
-                                        scale={scaleNotes}
-                                        highlightedNotes={highlightedNotes}
-                                        onSelect={this.onSelectHighlightedNotes}
-                                    />
-                                </Card>
-                                <Card title="7ths">
-                                    <Sevenths
-                                        scale={scaleNotes}
-                                        highlightedNotes={highlightedNotes}
-                                        onSelect={this.onSelectHighlightedNotes}
-                                    />
-                                </Card>
+                            <section>
+                                <strong>Chords</strong>
+                                <div className={styles.scroll}>
+                                    <div className={styles.info}>
+                                        <Card title="Triads">
+                                            <Triads
+                                                scale={scaleNotes}
+                                                highlightedNotes={highlightedNotes}
+                                                onSelect={this.onSelectHighlightedNotes}
+                                            />
+                                        </Card>
+                                        <Card title="7ths">
+                                            <Sevenths
+                                                scale={scaleNotes}
+                                                highlightedNotes={highlightedNotes}
+                                                onSelect={this.onSelectHighlightedNotes}
+                                            />
+                                        </Card>
+                                    </div>
+                                </div>
                             </section>
                         </Content>
                     </Layout>

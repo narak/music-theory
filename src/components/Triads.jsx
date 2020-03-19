@@ -26,23 +26,22 @@ export default function Triads({ scale, highlightedNotes, onSelect }) {
                     const triadName = getTriadName(triad);
 
                     return (
-                        <div
-                            key={index}
-                            className={cns(styles.chord, {
-                                [styles.active]: isEqual(triad, highlightedNotes),
-                            })}
-                            onClick={onSelect.bind(this, triad)}
-                        >
-                            <span className={styles.chordNotes}>{triad.join(' - ')}</span>
-                            is
-                            <Tooltip
-                                title={triadName && triadName.keys.join(' - ')}
-                                placement="right"
+                        <Tooltip title={triadName && triadName.keys.join(' - ')} placement="right">
+                            <div
+                                key={index}
+                                className={cns(styles.chord, {
+                                    [styles.active]: isEqual(triad, highlightedNotes),
+                                })}
+                                onClick={onSelect.bind(this, triad)}
                             >
-                                {triad[0]}
-                                {triadName && triadName.type}
-                            </Tooltip>
-                        </div>
+                                <span className={styles.chordNotes}>{triad.join(' - ')}</span>
+                                is
+                                <span>
+                                    {triad[0]}
+                                    {triadName && triadName.type}
+                                </span>
+                            </div>
+                        </Tooltip>
                     );
                 })}
         </div>

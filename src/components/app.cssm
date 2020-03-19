@@ -15,6 +15,11 @@
     outline: 1px solid #f0f0f0;
 }
 
+.scroll {
+    max-width: 100vh;
+    overflow: auto;
+}
+
 :global(*),
 :global(* *) {
     box-sizing: border-box;
@@ -28,4 +33,11 @@
     display: grid;
     grid-template-columns: 235px 365px 1fr;
     grid-gap: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+    .app {
+        margin: 0;
+        padding: 0;
+    }
 }

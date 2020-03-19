@@ -29,23 +29,25 @@ export default function Sevenths({ scale, highlightedNotes, onSelect }) {
                     const seventhName = getSeventhName(seventh);
 
                     return (
-                        <div
-                            key={index}
-                            className={cns(styles.chord, styles.chordSeventh, {
-                                [styles.active]: isEqual(seventh, highlightedNotes),
-                            })}
-                            onClick={onSelect.bind(this, seventh)}
+                        <Tooltip
+                            title={seventhName && seventhName.keys.join(' - ')}
+                            placement="right"
                         >
-                            <span className={styles.chordNotes}>{seventh.join(' - ')}</span>
-                            is
-                            <Tooltip
-                                title={seventhName && seventhName.keys.join(' - ')}
-                                placement="right"
+                            <div
+                                key={index}
+                                className={cns(styles.chord, styles.chordSeventh, {
+                                    [styles.active]: isEqual(seventh, highlightedNotes),
+                                })}
+                                onClick={onSelect.bind(this, seventh)}
                             >
-                                {seventh[0]}
-                                {seventhName && seventhName.type}
-                            </Tooltip>
-                        </div>
+                                <span className={styles.chordNotes}>{seventh.join(' - ')}</span>
+                                is
+                                <span>
+                                    {seventh[0]}
+                                    {seventhName && seventhName.type}
+                                </span>
+                            </div>
+                        </Tooltip>
                     );
                 })}
         </div>
