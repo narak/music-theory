@@ -15,7 +15,9 @@ console.log('Setting JS Static Path to:', staticPath);
 const config = {
     mode: isProdBuild ? 'production' : 'development',
 
-    entry: ['react-hot-loader/patch', path.join(__dirname, '../src/index.js')],
+    entry: isProdBuild
+        ? [path.join(__dirname, '../src/index.js')]
+        : ['react-hot-loader/patch', path.join(__dirname, '../src/index.js')],
 
     output: {
         path: path.resolve(__dirname, '../static', 'build'),
@@ -26,13 +28,10 @@ const config = {
     resolve: {
         modules: [path.resolve('./src'), 'node_modules'],
         extensions: ['.js', '.jsx', '.json'],
-        alias: {
-            // images: __dirname + '/static/images',
-        },
     },
 
     watchOptions: {
-        ignored: /node_modules/
+        ignored: /node_modules/,
     },
 
     module: {
@@ -63,7 +62,7 @@ const config = {
                             },
                             importLoaders: 1,
                         },
-                    }
+                    },
                 ],
             },
             {
@@ -105,14 +104,6 @@ const config = {
         compress: true,
         port: 9000,
         index: 'index.html',
-        proxy: {
-            '/nc_service/era/manager/*': {
-                target: 'https://10.44.76.63:9440/',
-                // auth: 'username:password',
-                secure: false,
-                changeOrigin: true,
-            },
-        },
     },
 };
 
