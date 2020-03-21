@@ -1,5 +1,6 @@
-import { getMajorScale } from './scale';
+import { getScale } from './scale';
 import { Notes } from '../constants/NoteConstants';
+import { ScaleType } from '../constants/ScaleConstants';
 
 /**
  * Converts  indexes into length - index.
@@ -31,7 +32,7 @@ const TriadNames = {
  * @return {[type]}       [description]
  */
 export function getTriadName(triad) {
-    const majorScale = getMajorScale(triad[0]);
+    const majorScale = getScale(triad[0], ScaleType.MAJOR);
     const keys = [1];
     let currentName;
 
@@ -90,7 +91,7 @@ const SeventhNames = {
  * @return {[type]}         [description]
  */
 export function getSeventhName(seventh) {
-    const majorScale = getMajorScale(seventh[0]);
+    const majorScale = getScale(seventh[0], ScaleType.MAJOR);
     const keys = [1];
     let currentName;
 

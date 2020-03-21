@@ -25,6 +25,14 @@
     box-sizing: border-box;
 }
 
+.scaleSelector {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    grid-gap: 20px;
+}
+
 .scaleContainer section {
     padding: 10px;
 }
