@@ -1,10 +1,6 @@
-// import styles from './notes.cssm';
-
 import React from 'react';
-// import cns from 'classnames';
 
 import { Notes } from '../constants/NoteConstants';
-// import { MajorScaleIntervals, MinorKeyNoteIndex } from '../constants/ScaleConstants';
 
 import NotesComponent from './Notes';
 
@@ -30,39 +26,15 @@ const BNotes = getStringNotes('B');
  * @param {[type]} options.selectedNotes [description]
  * @returns {[type]} [description]
  */
-export default function Fretboard({ selectedNotes, highlightedNotes }) {
+export default function Fretboard(props) {
     return (
         <div>
-            <NotesComponent
-                notes={ENotes}
-                selectedNotes={selectedNotes}
-                highlightedNotes={highlightedNotes}
-            />
-            <NotesComponent
-                notes={BNotes}
-                selectedNotes={selectedNotes}
-                highlightedNotes={highlightedNotes}
-            />
-            <NotesComponent
-                notes={GNotes}
-                selectedNotes={selectedNotes}
-                highlightedNotes={highlightedNotes}
-            />
-            <NotesComponent
-                notes={DNotes}
-                selectedNotes={selectedNotes}
-                highlightedNotes={highlightedNotes}
-            />
-            <NotesComponent
-                notes={ANotes}
-                selectedNotes={selectedNotes}
-                highlightedNotes={highlightedNotes}
-            />
-            <NotesComponent
-                notes={ENotes}
-                selectedNotes={selectedNotes}
-                highlightedNotes={highlightedNotes}
-            />
+            <NotesComponent notes={ENotes} {...props} />
+            <NotesComponent notes={BNotes} {...props} />
+            <NotesComponent notes={GNotes} {...props} />
+            <NotesComponent notes={DNotes} {...props} />
+            <NotesComponent notes={ANotes} {...props} />
+            <NotesComponent notes={ENotes} {...props} />
         </div>
     );
 }

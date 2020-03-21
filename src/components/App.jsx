@@ -61,6 +61,7 @@ class App extends React.Component {
                                     notes={reindexedNotes}
                                     selectedNotes={scaleNotes}
                                     highlightedNotes={highlightedNotes}
+                                    scaleType={scaleType}
                                 />
                             </div>
                         </section>
@@ -70,6 +71,7 @@ class App extends React.Component {
                                 <Fretboard
                                     selectedNotes={scaleNotes}
                                     highlightedNotes={highlightedNotes}
+                                    scaleType={scaleType}
                                 />
                             </div>
                         </section>

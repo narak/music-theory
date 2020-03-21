@@ -5,7 +5,12 @@ import cns from 'classnames';
 
 import { Tooltip } from 'antd';
 
-import { MajorScaleIntervals, MinorKeyNoteIndex } from '../constants/ScaleConstants';
+import {
+    ScaleType,
+    MajorScaleIntervals,
+    ScaleRelativeIndex,
+    ScaleRelativeLabel,
+} from '../constants/ScaleConstants';
 
 /**
  * [Notes description]
@@ -13,12 +18,12 @@ import { MajorScaleIntervals, MinorKeyNoteIndex } from '../constants/ScaleConsta
  * @param {[type]} options.selectedNotes [description]
  * @returns {[type]} [description]
  */
-export default function Notes({ notes, selectedNotes, highlightedNotes }) {
+export default function Notes({ notes, selectedNotes, highlightedNotes, scaleType }) {
     return (
         <div className={styles.notes}>
             {notes.map(note => {
                 const index = selectedNotes.indexOf(note);
-                const isRelativeMinor = index === MinorKeyNoteIndex;
+                const isRelativeMinor = index === ScaleRelativeIndex[scaleType];
                 const isActive = index > -1;
 
                 let tooltip;
@@ -26,7 +31,7 @@ export default function Notes({ notes, selectedNotes, highlightedNotes }) {
                     tooltip = MajorScaleIntervals[index];
 
                     if (isRelativeMinor) {
-                        tooltip += ', Relative Minor';
+                        tooltip += ', ' + ScaleRelativeLabel[scaleType];
                     } else if (index === 0) {
                         tooltip = 'Root';
                     }
@@ -39,7 +44,8 @@ export default function Notes({ notes, selectedNotes, highlightedNotes }) {
                             className={cns(styles.note, {
                                 [styles.active]: isActive,
                                 [styles.relativeMinor]: isRelativeMinor,
-                                [styles.highlight]: highlightedNotes && highlightedNotes.indexOf(note) > -1,
+                                [styles.highlight]:
+                                    highlightedNotes && highlightedNotes.indexOf(note) > -1,
                                 [styles.root]: index === 0,
                             })}
                         >
