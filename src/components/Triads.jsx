@@ -26,9 +26,12 @@ export default function Triads({ scale, highlightedNotes, onSelect }) {
                     const triadName = getTriadName(triad);
 
                     return (
-                        <Tooltip title={triadName && triadName.keys.join(' - ')} placement="right">
+                        <Tooltip
+                            key={index}
+                            title={triadName && triadName.keys.join(' - ')}
+                            placement="right"
+                        >
                             <div
-                                key={index}
                                 className={cns(styles.chord, {
                                     [styles.active]: isEqual(triad, highlightedNotes),
                                 })}

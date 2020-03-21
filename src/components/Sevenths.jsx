@@ -30,11 +30,11 @@ export default function Sevenths({ scale, highlightedNotes, onSelect }) {
 
                     return (
                         <Tooltip
+                            key={index}
                             title={seventhName && seventhName.keys.join(' - ')}
                             placement="right"
                         >
                             <div
-                                key={index}
                                 className={cns(styles.chord, styles.chordSeventh, {
                                     [styles.active]: isEqual(seventh, highlightedNotes),
                                 })}
