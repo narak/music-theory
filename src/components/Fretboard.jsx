@@ -21,10 +21,10 @@ const GNotes = getStringNotes('G');
 const BNotes = getStringNotes('B');
 
 /**
- * [Notes description]
- * @param {[type]} options.notes         [description]
- * @param {[type]} options.selectedNotes [description]
- * @returns {[type]} [description]
+ * The freboard component that composes the Notes component for each
+ * string
+ * @param {Object} props The component props
+ * @returns {Component}  The fretboard component
  */
 export default function Fretboard(props) {
     return (

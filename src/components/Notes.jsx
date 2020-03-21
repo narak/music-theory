@@ -6,7 +6,6 @@ import cns from 'classnames';
 import { Tooltip } from 'antd';
 
 import {
-    ScaleType,
     MajorScaleIntervals,
     ScaleRelativeIndex,
     ScaleRelativeLabel,
