@@ -5,14 +5,15 @@ import cns from 'classnames';
 import { Tooltip } from 'antd';
 
 import { MajorScaleSteps } from '../constants/ScaleConstants';
-import { getTriadName, isEqual } from '../utils/chords';
+import { getTriadName } from '../utils/chords';
+import isEqual from '../utils/isEqual';
 
 /**
  * [Traid description]
  * @param {[type]} options.scale [description]
  * @returns {[type]} [description]
  */
-export default function Triads({ scale, highlightedNotes, onSelect }) {
+export default function Triads({ scale, selectedChord, onSelect }) {
     return (
         <div>
             {Array(MajorScaleSteps.length)
@@ -33,7 +34,7 @@ export default function Triads({ scale, highlightedNotes, onSelect }) {
                         >
                             <div
                                 className={cns(styles.chord, {
-                                    [styles.active]: isEqual(triad, highlightedNotes),
+                                    [styles.active]: isEqual(triad, selectedChord),
                                 })}
                                 onClick={onSelect.bind(this, triad)}
                             >

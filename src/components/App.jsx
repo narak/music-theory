@@ -1,13 +1,14 @@
 import styles from './app.cssm';
 
 import { hot } from 'react-hot-loader/root';
-import React from 'react';
+import React, { Fragment } from 'react';
 
-import { Select, Radio, Layout, Card } from 'antd';
+import { Select, Radio, Layout, Card, Spin } from 'antd';
 
 import { Notes } from '../constants/NoteConstants';
 import { ScaleType, ScaleLabel } from '../constants/ScaleConstants';
-import { getScale } from '../utils/scale';
+import { getScale, findScales } from '../utils/scale';
+import isEqual from '../utils/isEqual';
 
 import NotesComponent from './Notes';
 import Fretboard from './Fretboard';
@@ -23,14 +24,48 @@ class App extends React.Component {
         scaleType: ScaleType.MAJOR,
         chordNotes: undefined,
         selectedNotes: undefined,
+        foundScales: undefined,
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        const notesToFindFor = this.state.selectedNotes || this.state.chordNotes;
+        const prevNotesToFindFor = prevState.selectedNotes || prevState.chordNotes;
+
+        if (!isEqual(prevNotesToFindFor, notesToFindFor)) {
+            this.scaleFinderAbort && this.scaleFinderAbort();
+
+            if (notesToFindFor.length > 2) {
+                this.setState({
+                    findingScales: true,
+                });
+                this.scaleFinderAbort = findScales(notesToFindFor, foundScales => {
+                    this.setState({
+                        foundScales,
+                        findingScales: false,
+                    });
+                });
+            } else {
+                this.setState({
+                    findingScales: false,
+                });
+            }
+        }
+    }
+
     render() {
-        const { scaleKey, scaleType, chordNotes, selectedNotes } = this.state;
+        const {
+            scaleKey,
+            scaleType,
+            chordNotes,
+            selectedNotes,
+            findingScales,
+            foundScales,
+        } = this.state;
         const { notes: scaleNotes } = getScale(scaleKey, scaleType);
 
         const selKeyIndex = Notes.indexOf(scaleKey);
         const reindexedNotes = Notes.slice(selKeyIndex).concat(Notes.slice(0, selKeyIndex));
+        const notesToFindFor = selectedNotes || chordNotes;
 
         return (
             <div className={styles.app}>
@@ -50,6 +85,21 @@ class App extends React.Component {
                                 </Radio>
                             ))}
                         </Radio.Group>
+                        <div className={styles.scaleFinder}>
+                            {notesToFindFor ? (
+                                notesToFindFor.length > 2 ? (
+                                    findingScales ? (
+                                        <Fragment>
+                                            Finding scales <Spin size="small" />
+                                        </Fragment>
+                                    ) : (
+                                        foundScales && foundScales.join(', ')
+                                    )
+                                ) : (
+                                    'Select three or more notes'
+                                )
+                            ) : null}
+                        </div>
                     </Content>
                 </Layout>
                 <br />
@@ -84,14 +134,14 @@ class App extends React.Component {
                                     <Card title="Triads">
                                         <Triads
                                             scale={scaleNotes}
-                                            chordNotes={chordNotes}
+                                            selectedChord={chordNotes}
                                             onSelect={this.noSelectChord}
                                         />
                                     </Card>
                                     <Card title="7ths">
                                         <Sevenths
                                             scale={scaleNotes}
-                                            chordNotes={chordNotes}
+                                            selectedChord={chordNotes}
                                             onSelect={this.noSelectChord}
                                         />
                                     </Card>
@@ -115,7 +165,10 @@ class App extends React.Component {
             newNotes.push(note);
         }
 
-        this.setState({ selectedNotes: newNotes, chordNotes: undefined });
+        this.setState({
+            selectedNotes: newNotes.length ? newNotes : undefined,
+            chordNotes: undefined,
+        });
     };
 
     onChangeScaleKey = scaleKey => {

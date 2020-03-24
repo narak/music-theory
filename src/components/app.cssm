@@ -28,14 +28,19 @@
 .scaleSelector {
     padding: 10px;
     display: grid;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 150px 1fr 200px;
     align-items: center;
     grid-gap: 20px;
+}
+
+.scaleFinder {
+    text-align: right;
 }
 
 .scaleContainer section {
     padding: 10px;
 }
+
 
 .info {
     display: grid;

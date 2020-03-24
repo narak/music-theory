@@ -6,14 +6,15 @@ import cns from 'classnames';
 import { Tooltip } from 'antd';
 
 import { MajorScaleSteps } from '../constants/ScaleConstants';
-import { getSeventhName, isEqual } from '../utils/chords';
+import { getSeventhName } from '../utils/chords';
+import isEqual from '../utils/isEqual';
 
 /**
  * [Traid description]
  * @param {[type]} options.scale [description]
  * @returns {[type]} [description]
  */
-export default function Sevenths({ scale, highlightedNotes, onSelect }) {
+export default function Sevenths({ scale, selectedChord, onSelect }) {
     return (
         <div>
             {Array(MajorScaleSteps.length)
@@ -36,7 +37,7 @@ export default function Sevenths({ scale, highlightedNotes, onSelect }) {
                         >
                             <div
                                 className={cns(styles.chord, styles.chordSeventh, {
-                                    [styles.active]: isEqual(seventh, highlightedNotes),
+                                    [styles.active]: isEqual(seventh, selectedChord),
                                 })}
                                 onClick={onSelect.bind(this, seventh)}
                             >
