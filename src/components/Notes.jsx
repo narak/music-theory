@@ -22,14 +22,16 @@ export default function Notes({ notes, selectedNotes, highlightedNotes, scaleTyp
         <div className={styles.notes}>
             {notes.map(note => {
                 const index = selectedNotes.indexOf(note);
-                const isRelativeMinor = index === ScaleRelativeIndex[scaleType];
+                const isRelative = index === ScaleRelativeIndex[scaleType];
                 const isActive = index > -1;
+                const isHighlighted = highlightedNotes && highlightedNotes.indexOf(note) > -1;
+                const isRoot = index === 0;
 
                 let tooltip;
                 if (isActive) {
                     tooltip = MajorScaleIntervals[index];
 
-                    if (isRelativeMinor) {
+                    if (isRelative) {
                         tooltip += ', ' + ScaleRelativeLabel[scaleType];
                     } else if (index === 0) {
                         tooltip = 'Root';
@@ -42,10 +44,9 @@ export default function Notes({ notes, selectedNotes, highlightedNotes, scaleTyp
                             key={note}
                             className={cns(styles.note, {
                                 [styles.active]: isActive,
-                                [styles.relativeMinor]: isRelativeMinor,
-                                [styles.highlight]:
-                                    highlightedNotes && highlightedNotes.indexOf(note) > -1,
-                                [styles.root]: index === 0,
+                                [styles.relative]: isRelative,
+                                [styles.highlight]: isHighlighted,
+                                [styles.root]: isRoot,
                             })}
                         >
                             {note}
