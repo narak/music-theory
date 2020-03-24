@@ -21,11 +21,12 @@ class App extends React.Component {
     state = {
         scaleKey: Notes[0],
         scaleType: ScaleType.MAJOR,
-        highlightedNotes: undefined,
+        chordNotes: undefined,
+        selectedNotes: undefined,
     };
 
     render() {
-        const { scaleKey, scaleType, highlightedNotes } = this.state;
+        const { scaleKey, scaleType, chordNotes, selectedNotes } = this.state;
         const { notes: scaleNotes } = getScale(scaleKey, scaleType);
 
         const selKeyIndex = Notes.indexOf(scaleKey);
@@ -59,9 +60,10 @@ class App extends React.Component {
                             <div className={styles.scroll}>
                                 <NotesComponent
                                     notes={reindexedNotes}
-                                    selectedNotes={scaleNotes}
-                                    highlightedNotes={highlightedNotes}
+                                    scaleNotes={scaleNotes}
+                                    highlightedNotes={chordNotes || selectedNotes}
                                     scaleType={scaleType}
+                                    onToggleNote={this.onToggleNote}
                                 />
                             </div>
                         </section>
@@ -69,8 +71,8 @@ class App extends React.Component {
                             <strong>Fretboard</strong>
                             <div className={styles.scroll}>
                                 <Fretboard
-                                    selectedNotes={scaleNotes}
-                                    highlightedNotes={highlightedNotes}
+                                    scaleNotes={scaleNotes}
+                                    highlightedNotes={chordNotes || selectedNotes}
                                     scaleType={scaleType}
                                 />
                             </div>
@@ -82,15 +84,15 @@ class App extends React.Component {
                                     <Card title="Triads">
                                         <Triads
                                             scale={scaleNotes}
-                                            highlightedNotes={highlightedNotes}
-                                            onSelect={this.onSelectHighlightedNotes}
+                                            chordNotes={chordNotes}
+                                            onSelect={this.noSelectChord}
                                         />
                                     </Card>
                                     <Card title="7ths">
                                         <Sevenths
                                             scale={scaleNotes}
-                                            highlightedNotes={highlightedNotes}
-                                            onSelect={this.onSelectHighlightedNotes}
+                                            chordNotes={chordNotes}
+                                            onSelect={this.noSelectChord}
                                         />
                                     </Card>
                                 </div>
@@ -102,6 +104,20 @@ class App extends React.Component {
         );
     }
 
+    onToggleNote = note => {
+        const { selectedNotes } = this.state;
+        const newNotes = selectedNotes ? [...selectedNotes] : [];
+
+        const noteIndex = newNotes.indexOf(note);
+        if (noteIndex > -1) {
+            newNotes.splice(noteIndex, 1);
+        } else {
+            newNotes.push(note);
+        }
+
+        this.setState({ selectedNotes: newNotes, chordNotes: undefined });
+    };
+
     onChangeScaleKey = scaleKey => {
         this.setState({ scaleKey });
     };
@@ -110,8 +126,8 @@ class App extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-    onSelectHighlightedNotes = highlightedNotes => {
-        this.setState({ highlightedNotes });
+    noSelectChord = chordNotes => {
+        this.setState({ chordNotes, selectedNotes: undefined });
     };
 }
 

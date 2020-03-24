@@ -14,14 +14,14 @@ import {
 /**
  * [Notes description]
  * @param {[type]} options.notes         [description]
- * @param {[type]} options.selectedNotes [description]
+ * @param {[type]} options.scaleNotes [description]
  * @returns {[type]} [description]
  */
-export default function Notes({ notes, selectedNotes, highlightedNotes, scaleType }) {
+export default function Notes({ notes, scaleNotes, highlightedNotes, scaleType, onToggleNote }) {
     return (
         <div className={styles.notes}>
             {notes.map(note => {
-                const index = selectedNotes.indexOf(note);
+                const index = scaleNotes.indexOf(note);
                 const isRelative = index === ScaleRelativeIndex[scaleType];
                 const isActive = index > -1;
                 const isHighlighted = highlightedNotes && highlightedNotes.indexOf(note) > -1;
@@ -47,7 +47,9 @@ export default function Notes({ notes, selectedNotes, highlightedNotes, scaleTyp
                                 [styles.relative]: isRelative,
                                 [styles.highlight]: isHighlighted,
                                 [styles.root]: isRoot,
+                                [styles.clickable]: !!onToggleNote,
                             })}
+                            onClick={onToggleNote && onToggleNote.bind(this, note)}
                         >
                             {note}
                         </div>

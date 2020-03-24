@@ -31,3 +31,39 @@
 .highlight {
     border: 1px solid hsl(247, 100%, 25%);
 }
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    background: hsl(0, 0%, 95%);
+}
+
+.active.clickable:hover {
+    background: hsl(247, 100%, 90%);
+}
+
+.relative.clickable:hover {
+    background: hsl(316, 100%, 85%);
+}
+
+.root.clickable:hover {
+    background: hsl(64, 100%, 87%)
+}
+
+.clickable:active {
+    background: hsl(0, 0%, 90%);
+}
+
+.active.clickable:active {
+    background: hsl(247, 100%, 85%);
+}
+
+.relative.clickable:active {
+    background: hsl(316, 100%, 80%);
+}
+
+.root.clickable:active {
+    background: hsl(64, 100%, 82%)
+}
