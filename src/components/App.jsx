@@ -3,10 +3,10 @@ import styles from './app.cssm';
 import { hot } from 'react-hot-loader/root';
 import React, { Fragment } from 'react';
 
-import { Select, Radio, Layout, Card, Spin } from 'antd';
+import { Select, Radio, Layout, Card, Spin, Tag } from 'antd';
 
 import { Notes } from '../constants/NoteConstants';
-import { ScaleType, ScaleLabel } from '../constants/ScaleConstants';
+import { ScaleType, ScaleTypeLabel } from '../constants/ScaleConstants';
 import { getScale, findScales } from '../utils/scale';
 import isEqual from '../utils/isEqual';
 
@@ -34,7 +34,8 @@ class App extends React.Component {
         if (!isEqual(prevNotesToFindFor, notesToFindFor)) {
             this.scaleFinderAbort && this.scaleFinderAbort();
 
-            if (notesToFindFor.length > 2) {
+            if (notesToFindFor && notesToFindFor.length > 2) {
+                /* eslint-disable react/no-did-update-set-state */
                 this.setState({
                     findingScales: true,
                 });
@@ -44,7 +45,7 @@ class App extends React.Component {
                         findingScales: false,
                     });
                 });
-            } else {
+            } else if (this.state.findingScales) {
                 this.setState({
                     findingScales: false,
                 });
@@ -79,9 +80,9 @@ class App extends React.Component {
                             ))}
                         </Select>
                         <Radio.Group name="scaleType" onChange={this.onChange} value={scaleType}>
-                            {Object.keys(ScaleLabel).map(type => (
+                            {Object.keys(ScaleTypeLabel).map(type => (
                                 <Radio key={type} value={type}>
-                                    {ScaleLabel[type]}
+                                    {ScaleTypeLabel[type]}
                                 </Radio>
                             ))}
                         </Radio.Group>
@@ -92,8 +93,21 @@ class App extends React.Component {
                                         <Fragment>
                                             Finding scales <Spin size="small" />
                                         </Fragment>
+                                    ) : foundScales && foundScales.length ? (
+                                        foundScales.map(({ key, type }, index) => (
+                                            <Tag
+                                                key={index}
+                                                onClick={this.onChangeScale.bind(this, {
+                                                    key,
+                                                    type,
+                                                })}
+                                                color={type === ScaleType.MAJOR ? 'blue' : 'cyan'}
+                                            >
+                                                {key} {ScaleTypeLabel[type]}
+                                            </Tag>
+                                        ))
                                     ) : (
-                                        foundScales && foundScales.join(', ')
+                                        'No scales match these notes'
                                     )
                                 ) : (
                                     'Select three or more notes'
@@ -177,6 +191,13 @@ class App extends React.Component {
 
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
+    };
+
+    onChangeScale = ({ key, type }) => {
+        this.setState({
+            scaleKey: key,
+            scaleType: type,
+        });
     };
 
     noSelectChord = chordNotes => {

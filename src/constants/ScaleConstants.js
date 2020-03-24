@@ -1,7 +1,7 @@
 import keyMirror from '../utils/keyMirror';
 
 export const ScaleType = keyMirror('MAJOR', 'MINOR');
-export const ScaleLabel = {
+export const ScaleTypeLabel = {
     [ScaleType.MAJOR]: 'Major',
     [ScaleType.MINOR]: 'Minor',
 };
