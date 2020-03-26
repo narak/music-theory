@@ -138,6 +138,7 @@ class App extends React.Component {
                                     scaleNotes={scaleNotes}
                                     highlightedNotes={chordNotes || selectedNotes}
                                     scaleType={scaleType}
+                                    onToggleNote={this.onToggleNote}
                                 />
                             </div>
                         </section>
