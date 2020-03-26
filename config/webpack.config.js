@@ -103,6 +103,7 @@ const config = {
         contentBase: path.join(__dirname, '../static'),
         compress: true,
         port: 9000,
+        host: '0.0.0.0',
         index: 'index.html',
     },
 };
