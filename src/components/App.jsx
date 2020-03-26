@@ -14,6 +14,8 @@ import NotesComponent from './Notes';
 import Fretboard from './Fretboard';
 import Triads from './Triads';
 import Sevenths from './Sevenths';
+import Tour from './Tour';
+import TextButton from './common/TextButton';
 
 const { Option } = Select;
 const { Content } = Layout;
@@ -72,21 +74,37 @@ class App extends React.Component {
             <div className={styles.app}>
                 <Layout>
                     <Content className={styles.scaleSelector}>
-                        <Select name="scaleKey" value={scaleKey} onChange={this.onChangeScaleKey}>
+                        <Select
+                            name="scaleKey"
+                            value={scaleKey}
+                            onChange={this.onChangeScaleKey}
+                            data-tour="scale-key-selector"
+                        >
                             {Notes.map(note => (
                                 <Option value={note} key={note}>
                                     {note}
                                 </Option>
                             ))}
                         </Select>
-                        <Radio.Group name="scaleType" onChange={this.onChange} value={scaleType}>
-                            {Object.keys(ScaleTypeLabel).map(type => (
-                                <Radio key={type} value={type}>
-                                    {ScaleTypeLabel[type]}
-                                </Radio>
-                            ))}
-                        </Radio.Group>
-                        <div className={styles.scaleFinder}>
+                        <div data-tour="scale-type-selector">
+                            <Radio.Group
+                                name="scaleType"
+                                onChange={this.onChange}
+                                value={scaleType}
+                            >
+                                {Object.keys(ScaleTypeLabel).map(type => (
+                                    <Radio key={type} value={type}>
+                                        {ScaleTypeLabel[type]}
+                                    </Radio>
+                                ))}
+                            </Radio.Group>
+                        </div>
+                        <div className={styles.center} data-tour="take-a-tour">
+                            <TextButton type="button" onClick={this.onStartTour}>
+                                Take a Tour!
+                            </TextButton>
+                        </div>
+                        <div className={styles.scaleFinder} data-tour="scale-finder">
                             {notesToFindFor ? (
                                 notesToFindFor.length > 2 ? (
                                     findingScales ? (
@@ -110,16 +128,26 @@ class App extends React.Component {
                                         'No scales match these notes'
                                     )
                                 ) : (
-                                    'Select three or more notes'
+                                    <>
+                                        Select <strong>three or more</strong> notes
+                                        <br />
+                                        to find matching scales
+                                    </>
                                 )
-                            ) : null}
+                            ) : (
+                                <>
+                                    Select a chord or any notes
+                                    <br />
+                                    to find matching scales
+                                </>
+                            )}
                         </div>
                     </Content>
                 </Layout>
                 <br />
-                <Layout>
-                    <Content className={styles.scaleContainer}>
-                        <section className={styles.notes}>
+                <Layout className={styles.scaleContainer}>
+                    <Content data-tour="notes-container">
+                        <section className={styles.notes} data-tour="rooted-scale">
                             <strong>Rooted Scale</strong>
                             <div className={styles.scroll}>
                                 <NotesComponent
@@ -131,7 +159,7 @@ class App extends React.Component {
                                 />
                             </div>
                         </section>
-                        <section>
+                        <section data-tour="fretboard">
                             <strong>Fretboard</strong>
                             <div className={styles.scroll}>
                                 <Fretboard
@@ -142,18 +170,20 @@ class App extends React.Component {
                                 />
                             </div>
                         </section>
+                    </Content>
+                    <Content data-tour="chords-container">
                         <section>
                             <strong>Chords</strong>
                             <div className={styles.scroll}>
                                 <div className={styles.info}>
-                                    <Card title="Triads">
+                                    <Card title="Triads" data-tour="triads">
                                         <Triads
                                             scale={scaleNotes}
                                             selectedChord={chordNotes}
                                             onSelect={this.noSelectChord}
                                         />
                                     </Card>
-                                    <Card title="7ths">
+                                    <Card title="7ths" data-tour="sevenths">
                                         <Sevenths
                                             scale={scaleNotes}
                                             selectedChord={chordNotes}
@@ -165,6 +195,7 @@ class App extends React.Component {
                         </section>
                     </Content>
                 </Layout>
+                <Tour isOpen={this.state.showingTour} onStopTour={this.onStopTour} />
             </div>
         );
     }
@@ -203,6 +234,14 @@ class App extends React.Component {
 
     noSelectChord = chordNotes => {
         this.setState({ chordNotes, selectedNotes: undefined });
+    };
+
+    onStartTour = () => {
+        this.setState({ showingTour: true });
+    };
+
+    onStopTour = () => {
+        this.setState({ showingTour: false });
     };
 }
 

@@ -28,9 +28,13 @@
 .scaleSelector {
     padding: 10px;
     display: grid;
-    grid-template-columns: 150px 1fr 250px;
+    grid-template-columns: 150px 150px 1fr 300px;
     align-items: center;
     grid-gap: 20px;
+}
+
+.center {
+    text-align: center;
 }
 
 .scaleFinder {
@@ -40,7 +44,6 @@
 .scaleContainer section {
     padding: 10px;
 }
-
 
 .info {
     display: grid;
