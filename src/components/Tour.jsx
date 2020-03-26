@@ -1,10 +1,14 @@
+import styles from './tour.cssm';
+
 import React from 'react';
 import ReactTour from 'reactour';
 
-// const style = {
-//     backgroundColor: 'black',
-//     color: 'white',
-// };
+import TextButton from './common/TextButton';
+
+const style = {
+    backgroundColor: 'black',
+    color: 'white',
+};
 
 const steps = [
     {
@@ -117,12 +121,21 @@ const steps = [
             </div>
         ),
     },
-]; //.map(step => Object.assign(step, { style }));
+].map(step => Object.assign(step, { style }));
 
 /**
  * The music tour component
  * @returns {Component} The tour react component
  */
 export default function Tour({ isOpen, onStopTour }) {
-    return <ReactTour steps={steps} isOpen={!!isOpen} onRequestClose={onStopTour} />;
+    return (
+        <ReactTour
+            steps={steps}
+            isOpen={!!isOpen}
+            lastStepNextButton={<TextButton>Done! Let's start playing</TextButton>}
+            nextButton={<TextButton className={styles.button}>Next</TextButton>}
+            prevButton={<TextButton className={styles.button}>Previous</TextButton>}
+            onRequestClose={onStopTour}
+        />
+    );
 }

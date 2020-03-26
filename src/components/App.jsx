@@ -129,17 +129,12 @@ class App extends React.Component {
                                     )
                                 ) : (
                                     <>
-                                        Select <strong>three or more</strong> notes
-                                        <br />
-                                        to find matching scales
+                                        Select <strong>three or more</strong> notes to find matching
+                                        scales
                                     </>
                                 )
                             ) : (
-                                <>
-                                    Select a chord or any notes
-                                    <br />
-                                    to find matching scales
-                                </>
+                                <>Select a chord or any notes to find matching scales</>
                             )}
                         </div>
                     </Content>
