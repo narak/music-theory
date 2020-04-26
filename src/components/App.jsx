@@ -174,6 +174,7 @@ class App extends React.Component {
                             </Select>
                             <div className={styles.scroll}>
                                 <Fretboard
+                                    tuning={tuning}
                                     scaleNotes={scaleNotes}
                                     highlightedNotes={chordNotes || selectedNotes}
                                     scaleType={scaleType}

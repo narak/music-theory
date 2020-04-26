@@ -27,3 +27,16 @@ export const TuningLabel = {
     [Tunings.OpenC]: 'Open C',
     [Tunings.OpenG]: 'Open G',
 };
+
+export const TuningNotes = {
+    [Tunings.E]: ['E', 'A', 'D', 'G', 'B', 'E'],
+    [Tunings.Eb]: ['Eb', 'Ab', 'C#', 'F#', 'Bb', 'Eb'],
+    [Tunings.DropD]: ['D', 'A', 'D', 'G', 'B', 'E'],
+    [Tunings.DropDb]: ['C#', 'Ab', 'C#', 'F#', 'Bb', 'Eb'],
+    [Tunings.DropC]: ['C', 'G', 'C', 'F', 'A', 'D'],
+    [Tunings.DropB]: ['B', 'F#', 'B', 'E', 'Ab', 'C#'],
+    [Tunings.DropBb]: ['Bb', 'F', 'Bb', 'Eb', 'G', 'C'],
+    [Tunings.OpenD]: ['D', 'A', 'D', 'F#', 'A', 'D'],
+    [Tunings.OpenC]: ['C', 'G', 'C', 'G', 'C', 'E'],
+    [Tunings.OpenG]: ['D', 'G', 'D', 'G', 'B', 'D'],
+};

@@ -2,25 +2,20 @@ import styles from './fretboard.cssm';
 
 import React from 'react';
 
-import { Notes } from '../constants/NoteConstants';
+import { Notes, TuningNotes } from '../constants/NoteConstants';
 
 import NotesComponent from './Notes';
 
 /**
- * [getStringNotes description]
- * @param  {[type]} string [description]
- * @return {[type]}        [description]
+ * Gets all the notes for the string.
+ * @param  {String} string The starting note of the guitar string
+ * @return {Array}         Array of notes identifying each fret note
  */
 function getStringNotes(string) {
+    console.log('calculating notes for ', string);
     const selKeyIndex = Notes.indexOf(string);
     return Notes.slice(selKeyIndex).concat(Notes.slice(0, selKeyIndex));
 }
-
-const ENotes = getStringNotes('E');
-const ANotes = getStringNotes('A');
-const DNotes = getStringNotes('D');
-const GNotes = getStringNotes('G');
-const BNotes = getStringNotes('B');
 
 /**
  * The freboard component that composes the Notes component for each
@@ -28,7 +23,7 @@ const BNotes = getStringNotes('B');
  * @param {Object} props The component props
  * @returns {Component}  The fretboard component
  */
-export default function Fretboard(props) {
+export default function Fretboard({ tuning, ...props }) {
     return (
         <div>
             <div className={styles.numbers}>
@@ -37,12 +32,14 @@ export default function Fretboard(props) {
                 ))}
             </div>
 
-            <NotesComponent notes={ENotes} zeroFret={true} {...props} />
-            <NotesComponent notes={BNotes} zeroFret={true} {...props} />
-            <NotesComponent notes={GNotes} zeroFret={true} {...props} />
-            <NotesComponent notes={DNotes} zeroFret={true} {...props} />
-            <NotesComponent notes={ANotes} zeroFret={true} {...props} />
-            <NotesComponent notes={ENotes} zeroFret={true} {...props} />
+            {TuningNotes[tuning].reverse().map((note, index) => (
+                <NotesComponent
+                    key={index}
+                    notes={getStringNotes(note)}
+                    zeroFret={true}
+                    {...props}
+                />
+            ))}
 
             <div className={styles.inlays}>
                 {Notes.map((_, index) => (
