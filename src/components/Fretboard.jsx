@@ -12,7 +12,6 @@ import NotesComponent from './Notes';
  * @return {Array}         Array of notes identifying each fret note
  */
 function getStringNotes(string) {
-    console.log('calculating notes for ', string);
     const selKeyIndex = Notes.indexOf(string);
     return Notes.slice(selKeyIndex).concat(Notes.slice(0, selKeyIndex));
 }

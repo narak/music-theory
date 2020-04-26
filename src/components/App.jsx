@@ -114,18 +114,29 @@ class App extends React.Component {
                                             Finding scales <Spin size="small" />
                                         </Fragment>
                                     ) : foundScales && foundScales.length ? (
-                                        foundScales.map(({ key, type }, index) => (
-                                            <Tag
-                                                key={index}
-                                                onClick={this.onChangeScale.bind(this, {
-                                                    key,
-                                                    type,
-                                                })}
-                                                color={type === ScaleType.MAJOR ? 'blue' : 'cyan'}
+                                        <Fragment>
+                                            {foundScales.map(({ key, type }, index) => (
+                                                <Tag
+                                                    key={index}
+                                                    onClick={this.onChangeScale.bind(this, {
+                                                        key,
+                                                        type,
+                                                    })}
+                                                    color={
+                                                        type === ScaleType.MAJOR ? 'blue' : 'cyan'
+                                                    }
+                                                >
+                                                    {key} {ScaleTypeLabel[type]}
+                                                </Tag>
+                                            ))}
+                                            <br />
+                                            <TextButton
+                                                type="button"
+                                                onClick={this.onClearSelectedNotes}
                                             >
-                                                {key} {ScaleTypeLabel[type]}
-                                            </Tag>
-                                        ))
+                                                Clear
+                                            </TextButton>
+                                        </Fragment>
                                     ) : (
                                         'No scales match these notes'
                                     )
@@ -225,6 +236,13 @@ class App extends React.Component {
 
         this.setState({
             selectedNotes: newNotes.length ? newNotes : undefined,
+            chordNotes: undefined,
+        });
+    };
+
+    onClearSelectedNotes = () => {
+        this.setState({
+            selectedNotes: undefined,
             chordNotes: undefined,
         });
     };
