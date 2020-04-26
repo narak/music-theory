@@ -32,7 +32,7 @@ export default function Fretboard({ tuning, ...props }) {
                 ))}
             </div>
 
-            {TuningNotes[tuning].reverse().map((note, index) => (
+            {TuningNotes[tuning].slice().reverse().map((note, index) => (
                 <NotesComponent
                     key={index}
                     notes={getStringNotes(note)}
