@@ -1,16 +1,19 @@
 import keyMirror from '../utils/keyMirror';
 
-export const ScaleType = keyMirror('MAJOR', 'MINOR');
+export const ScaleType = keyMirror('MAJOR', 'MINOR', 'MINOR_PENT');
 export const ScaleTypeLabel = {
     [ScaleType.MAJOR]: 'Major',
     [ScaleType.MINOR]: 'Minor',
+    [ScaleType.MINOR_PENT]: 'Minor Pentatonic',
 };
 
 export const MajorScaleSteps = [2, 2, 1, 2, 2, 2, 1];
 export const MinorScaleSteps = [2, 1, 2, 2, 1, 2, 2];
+export const MinorPentScaleSteps = [3, 2, 2, 3, 2];
 export const ScaleSteps = {
     [ScaleType.MAJOR]: MajorScaleSteps,
     [ScaleType.MINOR]: MinorScaleSteps,
+    [ScaleType.MINOR_PENT]: MinorPentScaleSteps,
 };
 
 export const MajorScaleIntervals = [
