@@ -31,6 +31,7 @@
     grid-template-columns: 150px 150px 1fr 300px;
     align-items: center;
     grid-gap: 20px;
+    height: 120px;
 }
 
 .center {
