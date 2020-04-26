@@ -45,6 +45,11 @@
     padding: 10px;
 }
 
+.tunings {
+    width: 200px;
+    margin-left: 1rem;
+}
+
 .info {
     display: grid;
     grid-template-columns: 235px 365px 1fr;

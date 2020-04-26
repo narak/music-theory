@@ -33,20 +33,23 @@ export default function Fretboard(props) {
         <div>
             <div className={styles.numbers}>
                 {Notes.map((_, index) => (
-                    <div>{index}</div>
+                    <div key={index}>{index}</div>
                 ))}
             </div>
 
-            <NotesComponent notes={ENotes} {...props} />
-            <NotesComponent notes={BNotes} {...props} />
-            <NotesComponent notes={GNotes} {...props} />
-            <NotesComponent notes={DNotes} {...props} />
-            <NotesComponent notes={ANotes} {...props} />
-            <NotesComponent notes={ENotes} {...props} />
+            <NotesComponent notes={ENotes} zeroFret={true} {...props} />
+            <NotesComponent notes={BNotes} zeroFret={true} {...props} />
+            <NotesComponent notes={GNotes} zeroFret={true} {...props} />
+            <NotesComponent notes={DNotes} zeroFret={true} {...props} />
+            <NotesComponent notes={ANotes} zeroFret={true} {...props} />
+            <NotesComponent notes={ENotes} zeroFret={true} {...props} />
 
             <div className={styles.inlays}>
                 {Notes.map((_, index) => (
-                    <div className={[0, 3, 5, 7, 9].indexOf(index) > -1 ? styles.dot : undefined} />
+                    <div
+                        key={index}
+                        className={[0, 3, 5, 7, 9].indexOf(index) > -1 ? styles.dot : undefined}
+                    />
                 ))}
             </div>
         </div>

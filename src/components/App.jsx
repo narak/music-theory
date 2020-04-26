@@ -5,7 +5,7 @@ import React, { Fragment } from 'react';
 
 import { Select, Radio, Layout, Card, Spin, Tag } from 'antd';
 
-import { Notes } from '../constants/NoteConstants';
+import { Notes, Tunings, TuningLabel } from '../constants/NoteConstants';
 import { ScaleType, ScaleTypeLabel } from '../constants/ScaleConstants';
 import { getScale, findScales } from '../utils/scale';
 import isEqual from '../utils/isEqual';
@@ -24,6 +24,7 @@ class App extends React.Component {
     state = {
         scaleKey: Notes[0],
         scaleType: ScaleType.MAJOR,
+        tuning: Tunings.E,
         chordNotes: undefined,
         selectedNotes: undefined,
         foundScales: undefined,
@@ -59,6 +60,7 @@ class App extends React.Component {
         const {
             scaleKey,
             scaleType,
+            tuning,
             chordNotes,
             selectedNotes,
             findingScales,
@@ -128,13 +130,15 @@ class App extends React.Component {
                                         'No scales match these notes'
                                     )
                                 ) : (
-                                    <>
+                                    <Fragment>
                                         Select <strong>three or more</strong> notes to find matching
                                         scales
-                                    </>
+                                    </Fragment>
                                 )
                             ) : (
-                                <>Select a chord or any notes to find matching scales</>
+                                <Fragment>
+                                    Select a chord or any notes to find matching scales
+                                </Fragment>
                             )}
                         </div>
                     </Content>
@@ -156,6 +160,18 @@ class App extends React.Component {
                         </section>
                         <section data-tour="fretboard">
                             <strong>Fretboard</strong>
+                            <Select
+                                name="tuning"
+                                value={tuning}
+                                onChange={this.onChangeTuning}
+                                className={styles.tunings}
+                            >
+                                {Tunings.map(tuning => (
+                                    <Option value={tuning} key={tuning}>
+                                        {TuningLabel[tuning]}
+                                    </Option>
+                                ))}
+                            </Select>
                             <div className={styles.scroll}>
                                 <Fretboard
                                     scaleNotes={scaleNotes}
@@ -214,6 +230,10 @@ class App extends React.Component {
 
     onChangeScaleKey = scaleKey => {
         this.setState({ scaleKey });
+    };
+
+    onChangeTuning = tuning => {
+        this.setState({ tuning });
     };
 
     onChange = e => {
