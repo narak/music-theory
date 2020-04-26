@@ -17,10 +17,17 @@ import {
  * @param {[type]} options.scaleNotes [description]
  * @returns {[type]} [description]
  */
-export default function Notes({ notes, scaleNotes, highlightedNotes, scaleType, onToggleNote }) {
+export default function Notes({
+    notes,
+    scaleNotes,
+    highlightedNotes,
+    scaleType,
+    zeroFret,
+    onToggleNote,
+}) {
     return (
         <div className={styles.notes}>
-            {notes.map(note => {
+            {notes.map((note, fretIndex) => {
                 const index = scaleNotes.indexOf(note);
                 const isRelative = index === ScaleRelativeIndex[scaleType];
                 const isActive = index > -1;
@@ -48,6 +55,7 @@ export default function Notes({ notes, scaleNotes, highlightedNotes, scaleType, 
                                 [styles.highlight]: isHighlighted,
                                 [styles.root]: isRoot,
                                 [styles.clickable]: !!onToggleNote,
+                                [styles.zeroFret]: fretIndex === 0 && zeroFret,
                             })}
                             onClick={onToggleNote && onToggleNote.bind(this, note)}
                         >

@@ -67,3 +67,9 @@
 .root.clickable:active {
     background: hsl(64, 100%, 82%);
 }
+
+.zeroFret {
+    background: hsl(0, 59%, 80%);
+    border-right: 5px solid hsl(0, 59%, 60%);
+    border-width: 0 5px 0 0;
+}
