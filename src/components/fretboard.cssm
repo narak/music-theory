@@ -1,6 +1,9 @@
+@value vars: '../vars.cssm';
+@value fretNoteSizes from vars;
+
 .numbers {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: fretNoteSizes;
     font-size: 16px;
     min-width: 800px;
     text-align: center;
@@ -11,7 +14,7 @@
 
 .inlays {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: fretNoteSizes;
     min-width: 800px;
     text-align: center;
     line-height: 16px;
@@ -22,5 +25,23 @@
     width: 5px;
     background: #000;
     margin: 5px auto;
+    border-radius: 50%;
+}
+
+.doubleDot div {
+    display: inline-block;
+    height: 5px;
+    width: 5px;
+    background: #000;
+    margin: 5px 0;
+    border-radius: 50%;
+}
+
+.doubleDot div + div {
+    display: inline-block;
+    height: 5px;
+    width: 5px;
+    background: #000;
+    margin-left: 5px;
     border-radius: 50%;
 }

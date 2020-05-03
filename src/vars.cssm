@@ -1,0 +1,18 @@
+@value base00: #1B2B34;
+@value base01: #343D46;
+@value base02: #4F5B66;
+@value base03: #65737E;
+@value base04: #A7ADBA;
+@value base05: #C0C5CE;
+@value base06: #CDD3DE;
+@value base07: #D8DEE9;
+@value base08: #EC5f67;
+@value base09: #F99157;
+@value base10: #FAC863;
+@value base11: #99C794;
+@value base12: #5FB3B3;
+@value base13: #6699CC;
+@value base14: #C594C5;
+@value base15: #AB7967;
+
+@value fretNoteSizes: .6fr repeat(11, 1fr) repeat(5, .8fr) repeat(8, .6fr);

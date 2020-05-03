@@ -40,3 +40,7 @@ export const TuningNotes = {
     [Tunings.OpenC]: ['C', 'G', 'C', 'G', 'C', 'E'],
     [Tunings.OpenG]: ['D', 'G', 'D', 'G', 'B', 'D'],
 };
+
+
+export const DotFrets = [0, 3, 5, 7, 9];
+export const DoubleDotFrets = [12, 24];

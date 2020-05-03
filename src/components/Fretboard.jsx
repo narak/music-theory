@@ -1,8 +1,9 @@
 import styles from './fretboard.cssm';
 
 import React from 'react';
+import cns from 'classnames';
 
-import { Notes, TuningNotes } from '../constants/NoteConstants';
+import { Notes, TuningNotes, DotFrets, DoubleDotFrets } from '../constants/NoteConstants';
 
 import NotesComponent from './Notes';
 
@@ -23,31 +24,57 @@ function getStringNotes(string) {
  * @returns {Component}  The fretboard component
  */
 export default function Fretboard({ tuning, ...props }) {
+    const noteCount = 25;
+    const fretNumMarkup = [];
+    const inlayMarkup = [];
+    for (let fretIndex = 0; fretIndex < noteCount; fretIndex++) {
+        const noteIndex = fretIndex % 12;
+        fretNumMarkup.push(<div key={fretIndex}>{fretIndex}</div>);
+
+        if (DotFrets.indexOf(fretIndex) > -1) {
+            inlayMarkup.push(
+                <div
+                    key={fretIndex}
+                    className={cns({
+                        [styles.dot]: true,
+                    })}
+                />
+            );
+        } else if (DoubleDotFrets.indexOf(fretIndex) > -1) {
+            inlayMarkup.push(
+                <div
+                    key={fretIndex}
+                    className={cns({
+                        [styles.doubleDot]: true,
+                    })}
+                >
+                    <div />
+                    <div />
+                </div>
+            );
+        } else {
+            inlayMarkup.push(<div key={fretIndex} />);
+        }
+    }
+
     return (
         <div>
-            <div className={styles.numbers}>
-                {Notes.map((_, index) => (
-                    <div key={index}>{index}</div>
-                ))}
-            </div>
+            <div className={styles.numbers}>{fretNumMarkup}</div>
 
-            {TuningNotes[tuning].slice().reverse().map((note, index) => (
-                <NotesComponent
-                    key={index}
-                    notes={getStringNotes(note)}
-                    zeroFret={true}
-                    {...props}
-                />
-            ))}
-
-            <div className={styles.inlays}>
-                {Notes.map((_, index) => (
-                    <div
+            {TuningNotes[tuning]
+                .slice()
+                .reverse()
+                .map((note, index) => (
+                    <NotesComponent
                         key={index}
-                        className={[0, 3, 5, 7, 9].indexOf(index) > -1 ? styles.dot : undefined}
+                        notes={getStringNotes(note)}
+                        zeroFret={true}
+                        noteCount={noteCount}
+                        {...props}
                     />
                 ))}
-            </div>
+
+            <div className={styles.inlays}>{inlayMarkup}</div>
         </div>
     );
 }

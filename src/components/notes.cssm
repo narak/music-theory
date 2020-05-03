@@ -1,8 +1,17 @@
+@value vars: '../vars.cssm';
+@value fretNoteSizes from vars;
+
 .notes {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     font-size: 16px;
     min-width: 800px;
+}
+
+.notes25 {
+    grid-template-columns: fretNoteSizes;
+    font-size: 16px;
+    min-width: 1200px;
 }
 
 .note {
