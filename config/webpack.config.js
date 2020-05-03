@@ -97,7 +97,7 @@ const config = {
         ],
     },
 
-    devtool: 'source-map',
+    devtool: 'eval-cheap-source-map',
 
     devServer: {
         contentBase: path.join(__dirname, '../static'),

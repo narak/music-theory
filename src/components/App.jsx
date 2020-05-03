@@ -9,6 +9,7 @@ import { Notes, Tunings, TuningLabel } from '../constants/NoteConstants';
 import { ScaleType, ScaleTypeLabel } from '../constants/ScaleConstants';
 import { getScale, findScales } from '../utils/scale';
 import isEqual from '../utils/isEqual';
+import requestIdleCallback from '../utils/requestIdleCallback';
 
 import NotesComponent from './Notes';
 import Fretboard from './Fretboard';
@@ -19,17 +20,37 @@ import TextButton from './common/TextButton';
 
 const { Option } = Select;
 
+const STORAGE_KEY = 'music-theory';
+const PersistKeys = ['scaleKey', 'scaleType', 'tuning', 'chordNotes', 'selectedNotes'];
+
+const storedState = localStorage.getItem(STORAGE_KEY);
+const defaultState = storedState
+    ? JSON.parse(storedState)
+    : {
+          scaleKey: Notes[0],
+          scaleType: ScaleType.MAJOR,
+          tuning: Tunings.E,
+          chordNotes: undefined,
+          selectedNotes: undefined,
+          foundScales: undefined,
+      };
+
 class App extends React.Component {
-    state = {
-        scaleKey: Notes[0],
-        scaleType: ScaleType.MAJOR,
-        tuning: Tunings.E,
-        chordNotes: undefined,
-        selectedNotes: undefined,
-        foundScales: undefined,
-    };
+    state = defaultState;
 
     componentDidUpdate(prevProps, prevState) {
+        requestIdleCallback(() => {
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(
+                    PersistKeys.reduce((acc, key) => {
+                        acc[key] = this.state[key];
+                        return acc;
+                    }, {})
+                )
+            );
+        });
+
         const notesToFindFor = this.state.selectedNotes || this.state.chordNotes;
         const prevNotesToFindFor = prevState.selectedNotes || prevState.chordNotes;
 
