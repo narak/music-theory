@@ -28,7 +28,6 @@ export default function Fretboard({ tuning, ...props }) {
     const fretNumMarkup = [];
     const inlayMarkup = [];
     for (let fretIndex = 0; fretIndex < noteCount; fretIndex++) {
-        const noteIndex = fretIndex % 12;
         fretNumMarkup.push(<div key={fretIndex}>{fretIndex}</div>);
 
         if (DotFrets.indexOf(fretIndex) > -1) {

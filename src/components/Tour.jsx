@@ -50,7 +50,7 @@ const steps = [
                 <strong>Fretboard</strong>
                 <br />
                 Same as the <em>Rooted Scale</em>, with all the same functionalities, but this is in
-                the form of a Guitar's fretboard in standard EADGBE tuning.
+                the form of a Guitar's fretboard. Try changing the tuning!
             </div>
         ),
     },
@@ -86,7 +86,7 @@ const steps = [
         ),
     },
     {
-        selector: '[data-tour="notes-container"]',
+        selector: '[data-tour="rooted-scale"]',
         content: () => (
             <div>The notes of the chord you selected will highlighted with a thicker border.</div>
         ),

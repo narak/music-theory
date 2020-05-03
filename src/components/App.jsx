@@ -3,7 +3,7 @@ import styles from './app.cssm';
 import { hot } from 'react-hot-loader/root';
 import React, { Fragment } from 'react';
 
-import { Select, Radio, Layout, Card, Spin, Tag } from 'antd';
+import { Select, Radio, Card, Spin, Tag } from 'antd';
 
 import { Notes, Tunings, TuningLabel } from '../constants/NoteConstants';
 import { ScaleType, ScaleTypeLabel } from '../constants/ScaleConstants';
@@ -18,7 +18,6 @@ import Tour from './Tour';
 import TextButton from './common/TextButton';
 
 const { Option } = Select;
-const { Content } = Layout;
 
 class App extends React.Component {
     state = {
@@ -74,150 +73,135 @@ class App extends React.Component {
 
         return (
             <div className={styles.app}>
-                <Layout>
-                    <Content className={styles.scaleSelector}>
-                        <Select
-                            name="scaleKey"
-                            value={scaleKey}
-                            onChange={this.onChangeScaleKey}
-                            data-tour="scale-key-selector"
-                        >
-                            {Notes.map(note => (
-                                <Option value={note} key={note}>
-                                    {note}
-                                </Option>
+                <section className={styles.scaleSelector}>
+                    <Select
+                        name="scaleKey"
+                        value={scaleKey}
+                        onChange={this.onChangeScaleKey}
+                        data-tour="scale-key-selector"
+                    >
+                        {Notes.map(note => (
+                            <Option value={note} key={note}>
+                                {note}
+                            </Option>
+                        ))}
+                    </Select>
+                    <div data-tour="scale-type-selector">
+                        <Radio.Group name="scaleType" onChange={this.onChange} value={scaleType}>
+                            {Object.keys(ScaleTypeLabel).map(type => (
+                                <Radio key={type} value={type}>
+                                    {ScaleTypeLabel[type]}
+                                </Radio>
                             ))}
-                        </Select>
-                        <div data-tour="scale-type-selector">
-                            <Radio.Group
-                                name="scaleType"
-                                onChange={this.onChange}
-                                value={scaleType}
-                            >
-                                {Object.keys(ScaleTypeLabel).map(type => (
-                                    <Radio key={type} value={type}>
-                                        {ScaleTypeLabel[type]}
-                                    </Radio>
-                                ))}
-                            </Radio.Group>
-                        </div>
-                        <div className={styles.center} data-tour="take-a-tour">
-                            <TextButton type="button" onClick={this.onStartTour}>
-                                Take a Tour!
-                            </TextButton>
-                        </div>
-                        <div className={styles.scaleFinder} data-tour="scale-finder">
-                            {notesToFindFor ? (
-                                notesToFindFor.length > 2 ? (
-                                    findingScales ? (
-                                        <Fragment>
-                                            Finding scales <Spin size="small" />
-                                        </Fragment>
-                                    ) : foundScales && foundScales.length ? (
-                                        <Fragment>
-                                            {foundScales.map(({ key, type }, index) => (
-                                                <Tag
-                                                    key={index}
-                                                    onClick={this.onChangeScale.bind(this, {
-                                                        key,
-                                                        type,
-                                                    })}
-                                                    color={
-                                                        type === ScaleType.MAJOR ? 'blue' : 'cyan'
-                                                    }
-                                                >
-                                                    {key} {ScaleTypeLabel[type]}
-                                                </Tag>
-                                            ))}
-                                            <br />
-                                            <TextButton
-                                                type="button"
-                                                onClick={this.onClearSelectedNotes}
-                                            >
-                                                Clear
-                                            </TextButton>
-                                        </Fragment>
-                                    ) : (
-                                        'No scales match these notes'
-                                    )
-                                ) : (
+                        </Radio.Group>
+                    </div>
+                    <div className={styles.center} data-tour="take-a-tour">
+                        <TextButton type="button" onClick={this.onStartTour}>
+                            Take a Tour!
+                        </TextButton>
+                    </div>
+                    <div className={styles.scaleFinder} data-tour="scale-finder">
+                        {notesToFindFor ? (
+                            notesToFindFor.length > 2 ? (
+                                findingScales ? (
                                     <Fragment>
-                                        Select <strong>three or more</strong> notes to find matching
-                                        scales
+                                        Finding scales <Spin size="small" />
                                     </Fragment>
+                                ) : foundScales && foundScales.length ? (
+                                    <Fragment>
+                                        {foundScales.map(({ key, type }, index) => (
+                                            <Tag
+                                                key={index}
+                                                onClick={this.onChangeScale.bind(this, {
+                                                    key,
+                                                    type,
+                                                })}
+                                                color={type === ScaleType.MAJOR ? 'blue' : 'cyan'}
+                                            >
+                                                {key} {ScaleTypeLabel[type]}
+                                            </Tag>
+                                        ))}
+                                        <br />
+                                        <TextButton
+                                            type="button"
+                                            onClick={this.onClearSelectedNotes}
+                                        >
+                                            Clear
+                                        </TextButton>
+                                    </Fragment>
+                                ) : (
+                                    'No scales match these notes'
                                 )
                             ) : (
                                 <Fragment>
-                                    Select a chord or any notes to find matching scales
+                                    Select <strong>three or more</strong> notes to find matching
+                                    scales
                                 </Fragment>
-                            )}
+                            )
+                        ) : (
+                            <Fragment>Select a chord or any notes to find matching scales</Fragment>
+                        )}
+                    </div>
+                </section>
+                <section className={styles.notes} data-tour="rooted-scale">
+                    <strong>Rooted Scale</strong>
+                    <div className={styles.scroll}>
+                        <NotesComponent
+                            notes={reindexedNotes}
+                            scaleNotes={scaleNotes}
+                            highlightedNotes={chordNotes || selectedNotes}
+                            scaleType={scaleType}
+                            onToggleNote={this.onToggleNote}
+                        />
+                    </div>
+                </section>
+                <section data-tour="fretboard">
+                    <strong>Fretboard</strong>
+                    <Select
+                        name="tuning"
+                        value={tuning}
+                        onChange={this.onChangeTuning}
+                        className={styles.tunings}
+                    >
+                        {Tunings.map(tuning => (
+                            <Option value={tuning} key={tuning}>
+                                {TuningLabel[tuning]}
+                            </Option>
+                        ))}
+                    </Select>
+                    <div className={styles.scroll}>
+                        <Fretboard
+                            tuning={tuning}
+                            scaleNotes={scaleNotes}
+                            highlightedNotes={chordNotes || selectedNotes}
+                            scaleType={scaleType}
+                            onToggleNote={this.onToggleNote}
+                        />
+                    </div>
+                </section>
+                <section data-tour="chords-container">
+                    <section>
+                        <strong>Chords</strong>
+                        <div className={styles.scroll}>
+                            <div className={styles.info}>
+                                <Card title="Triads" data-tour="triads">
+                                    <Triads
+                                        scale={scaleNotes}
+                                        selectedChord={chordNotes}
+                                        onSelect={this.noSelectChord}
+                                    />
+                                </Card>
+                                <Card title="7ths" data-tour="sevenths">
+                                    <Sevenths
+                                        scale={scaleNotes}
+                                        selectedChord={chordNotes}
+                                        onSelect={this.noSelectChord}
+                                    />
+                                </Card>
+                            </div>
                         </div>
-                    </Content>
-                </Layout>
-                <br />
-                <Layout className={styles.scaleContainer}>
-                    <Content data-tour="notes-container">
-                        <section className={styles.notes} data-tour="rooted-scale">
-                            <strong>Rooted Scale</strong>
-                            <div className={styles.scroll}>
-                                <NotesComponent
-                                    notes={reindexedNotes}
-                                    scaleNotes={scaleNotes}
-                                    highlightedNotes={chordNotes || selectedNotes}
-                                    scaleType={scaleType}
-                                    onToggleNote={this.onToggleNote}
-                                />
-                            </div>
-                        </section>
-                        <section data-tour="fretboard">
-                            <strong>Fretboard</strong>
-                            <Select
-                                name="tuning"
-                                value={tuning}
-                                onChange={this.onChangeTuning}
-                                className={styles.tunings}
-                            >
-                                {Tunings.map(tuning => (
-                                    <Option value={tuning} key={tuning}>
-                                        {TuningLabel[tuning]}
-                                    </Option>
-                                ))}
-                            </Select>
-                            <div className={styles.scroll}>
-                                <Fretboard
-                                    tuning={tuning}
-                                    scaleNotes={scaleNotes}
-                                    highlightedNotes={chordNotes || selectedNotes}
-                                    scaleType={scaleType}
-                                    onToggleNote={this.onToggleNote}
-                                />
-                            </div>
-                        </section>
-                    </Content>
-                    <Content data-tour="chords-container">
-                        <section>
-                            <strong>Chords</strong>
-                            <div className={styles.scroll}>
-                                <div className={styles.info}>
-                                    <Card title="Triads" data-tour="triads">
-                                        <Triads
-                                            scale={scaleNotes}
-                                            selectedChord={chordNotes}
-                                            onSelect={this.noSelectChord}
-                                        />
-                                    </Card>
-                                    <Card title="7ths" data-tour="sevenths">
-                                        <Sevenths
-                                            scale={scaleNotes}
-                                            selectedChord={chordNotes}
-                                            onSelect={this.noSelectChord}
-                                        />
-                                    </Card>
-                                </div>
-                            </div>
-                        </section>
-                    </Content>
-                </Layout>
+                    </section>
+                </section>
                 <Tour isOpen={this.state.showingTour} onStopTour={this.onStopTour} />
             </div>
         );

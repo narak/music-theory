@@ -1,5 +1,5 @@
 @value vars: '../vars.cssm';
-@value fretNoteSizes from vars;
+@value fretNoteSizes, base00, base01, base06, base07, base12, base13, base14, base15 from vars;
 
 .notes {
     display: grid;
@@ -17,28 +17,42 @@
 .note {
     text-align: center;
     line-height: 24px;
-    background: #fff;
+    background: white;
+    color: base01;
     box-shadow: 0 0 1px #000;
 }
 
 .active {
-    border: 1px solid hsl(247, 100%, 95%);
-    background: hsl(247, 100%, 95%);
+    border: 1px solid base07;
+    background: base07;
+}
+
+.zeroFret {
+    background: base15;
+    border-right: 5px solid hsl(0, 59%, 40%);
+    border-width: 0 5px 0 0;
 }
 
 .root {
-    border: 1px solid hsl(64, 100%, 92%);
-    background: hsl(64, 100%, 92%);
+    border: 1px solid base13;
+    background: base13;
     font-weight: 600;
 }
 
 .relative {
-    border: 1px solid hsl(316, 100%, 90%);
-    background: hsl(316, 100%, 90%);
+    border: 1px solid base14;
+    background: base14;
 }
 
 .highlight {
-    border: 1px solid hsl(247, 100%, 25%);
+    border: 1px solid base00;
+}
+
+.zeroFret,
+.zeroFret.root,
+.zeroFret.relative,
+.zeroFret.highlight {
+    border-right: 5px solid hsl(0, 59%, 40%);
 }
 
 .clickable {
@@ -46,39 +60,17 @@
 }
 
 .clickable:hover {
-    background: hsl(0, 0%, 95%);
+    background: base07;
 }
 
 .active.clickable:hover {
-    background: hsl(247, 100%, 90%);
+    background: base06;
 }
 
 .relative.clickable:hover {
-    background: hsl(316, 100%, 85%);
+    background: base13;
 }
 
 .root.clickable:hover {
-    background: hsl(64, 100%, 87%);
-}
-
-.clickable:active {
-    background: hsl(0, 0%, 90%);
-}
-
-.active.clickable:active {
-    background: hsl(247, 100%, 85%);
-}
-
-.relative.clickable:active {
-    background: hsl(316, 100%, 80%);
-}
-
-.root.clickable:active {
-    background: hsl(64, 100%, 82%);
-}
-
-.zeroFret {
-    background: hsl(0, 59%, 80%);
-    border-right: 5px solid hsl(0, 59%, 60%);
-    border-width: 0 5px 0 0;
+    background: base12;
 }

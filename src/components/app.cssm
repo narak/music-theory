@@ -1,18 +1,26 @@
+/* importing colors */
+@value colors: "../vars.cssm";
+@value base00, base01, base02 from colors;
+
+
 :global(html),
 :global(body) {
     margin: 0;
     padding: 0;
-    background: #fff;
+    background: base00;
     font-family: 'Montserrat', serif;
 }
 
-.app {
-    margin: 10px;
-    padding: 10px;
+:global(*),
+:global(* *) {
+    box-sizing: border-box;
 }
 
-.app:focus {
-    outline: 1px solid #f0f0f0;
+.app {
+    display: grid;
+    grid-gap: 1.2rem;
+    margin: 1rem;
+    padding: 1rem;
 }
 
 .scroll {
@@ -26,12 +34,11 @@
 }
 
 .scaleSelector {
-    padding: 10px;
     display: grid;
-    grid-template-columns: 150px 150px 1fr 300px;
+    grid-template-columns: 1fr 2fr 1fr 3fr;
     align-items: center;
     grid-gap: 20px;
-    height: 120px;
+    height: 80px;
 }
 
 .center {
