@@ -1,9 +1,9 @@
-import styles from './notes.cssm';
+import styles from './notes.module.css';
 
 import React from 'react';
 import cns from 'classnames';
 
-import { Tooltip } from 'antd';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 import {
     MajorScaleIntervals,
@@ -48,22 +48,27 @@ export default function Notes({
         }
 
         notesMarkup.push(
-            <Tooltip key={fretIndex} title={tooltip}>
-                <div
-                    key={note}
-                    className={cns(styles.note, {
-                        [styles.active]: isActive,
-                        [styles.relative]: isRelative,
-                        [styles.highlight]: isHighlighted,
-                        [styles.root]: isRoot,
-                        [styles.clickable]: !!onToggleNote,
-                        [styles.zeroFret]: fretIndex === 0 && zeroFret,
-                    })}
-                    onClick={onToggleNote && onToggleNote.bind(this, note)}
-                >
-                    {note}
-                </div>
-            </Tooltip>
+            <TooltipProvider key={fretIndex}>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <div
+                            key={note}
+                            className={cns(styles.note, {
+                                [styles.active]: isActive,
+                                [styles.relative]: isRelative,
+                                [styles.highlight]: isHighlighted,
+                                [styles.root]: isRoot,
+                                [styles.clickable]: !!onToggleNote,
+                                [styles.zeroFret]: fretIndex === 0 && zeroFret,
+                            })}
+                            onClick={onToggleNote && onToggleNote.bind(this, note)}
+                        >
+                            {note}
+                        </div>
+                    </TooltipTrigger>
+                    {tooltip && <TooltipContent>{tooltip}</TooltipContent>}
+                </Tooltip>
+            </TooltipProvider>
         );
     }
 

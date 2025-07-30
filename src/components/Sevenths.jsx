@@ -1,9 +1,9 @@
-import styles from './chords.cssm';
+import styles from './chords.module.css';
 
 import React from 'react';
 import cns from 'classnames';
 
-import { Tooltip } from 'antd';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 import { MajorScaleSteps } from '../constants/ScaleConstants';
 import { getSeventhName } from '../utils/chords';
@@ -30,25 +30,30 @@ export default function Sevenths({ scale, selectedChord, onSelect }) {
                     const seventhName = getSeventhName(seventh);
 
                     return (
-                        <Tooltip
-                            key={index}
-                            title={seventhName && seventhName.keys.join(' - ')}
-                            placement="right"
-                        >
-                            <div
-                                className={cns(styles.chord, styles.chordSeventh, {
-                                    [styles.active]: isEqual(seventh, selectedChord),
-                                })}
-                                onClick={onSelect.bind(this, seventh)}
-                            >
-                                <span className={styles.chordNotes}>{seventh.join(' - ')}</span>
-                                is
-                                <span>
-                                    {seventh[0]}
-                                    {seventhName && seventhName.type}
-                                </span>
-                            </div>
-                        </Tooltip>
+                        <TooltipProvider key={index}>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <div
+                                        className={cns(styles.chord, styles.chordSeventh, {
+                                            [styles.active]: isEqual(seventh, selectedChord),
+                                        })}
+                                        onClick={onSelect.bind(this, seventh)}
+                                    >
+                                        <span className={styles.chordNotes}>{seventh.join(' - ')}</span>
+                                        is
+                                        <span>
+                                            {seventh[0]}
+                                            {seventhName && seventhName.type}
+                                        </span>
+                                    </div>
+                                </TooltipTrigger>
+                                {seventhName && seventhName.keys && (
+                                    <TooltipContent side="right">
+                                        {seventhName.keys.join(' - ')}
+                                    </TooltipContent>
+                                )}
+                            </Tooltip>
+                        </TooltipProvider>
                     );
                 })}
         </div>

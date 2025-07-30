@@ -1,5 +1,4 @@
-@value vars: '../vars.cssm';
-@value base01 from vars;
+@import '../vars.module.css';
 
 .chord {
     display: grid;
@@ -20,7 +19,7 @@
 
 .chord:active,
 .chord.active {
-    background: base01;
+    background: var(--base01);
 }
 
 .chordNotes {

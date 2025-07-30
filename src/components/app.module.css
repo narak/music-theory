@@ -1,13 +1,11 @@
 /* importing colors */
-@value colors: "../vars.cssm";
-@value base00, base01, base02 from colors;
-
+@import "../vars.module.css";
 
 :global(html),
 :global(body) {
     margin: 0;
     padding: 0;
-    background: base00;
+    /* background: var(--base00); */
     font-family: 'Montserrat', serif;
 }
 
@@ -28,12 +26,7 @@
     overflow: auto;
 }
 
-:global(*),
-:global(* *) {
-    box-sizing: border-box;
-}
-
-.scaleSelector {
+/* .scaleSelector {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 3fr;
     align-items: center;
@@ -43,7 +36,7 @@
 
 .center {
     text-align: center;
-}
+} */
 
 .scaleFinder {
     text-align: right;

@@ -1,9 +1,8 @@
-@value vars: '../vars.cssm';
-@value fretNoteSizes, base07 from vars;
+@import '../vars.module.css';
 
 .numbers {
     display: grid;
-    grid-template-columns: fretNoteSizes;
+    grid-template-columns: var(--fretNoteSizes);
     font-size: 16px;
     min-width: 800px;
     text-align: center;
@@ -14,7 +13,7 @@
 
 .inlays {
     display: grid;
-    grid-template-columns: fretNoteSizes;
+    grid-template-columns: var(--fretNoteSizes);
     min-width: 800px;
     text-align: center;
     line-height: 16px;
@@ -23,7 +22,7 @@
 .dot {
     height: 5px;
     width: 5px;
-    background: base07;
+    background: var(--base07);
     margin: 5px auto;
     border-radius: 50%;
 }
@@ -32,7 +31,7 @@
     display: inline-block;
     height: 5px;
     width: 5px;
-    background: base07;
+    background: var(--base07);
     margin: 5px 0;
     border-radius: 50%;
 }

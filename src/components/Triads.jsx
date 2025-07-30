@@ -1,8 +1,8 @@
-import styles from './chords.cssm';
+import styles from './chords.module.css';
 
 import React from 'react';
 import cns from 'classnames';
-import { Tooltip } from 'antd';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 import { MajorScaleSteps } from '../constants/ScaleConstants';
 import { getTriadName } from '../utils/chords';
@@ -27,25 +27,30 @@ export default function Triads({ scale, selectedChord, onSelect }) {
                     const triadName = getTriadName(triad);
 
                     return (
-                        <Tooltip
-                            key={index}
-                            title={triadName && triadName.keys.join(' - ')}
-                            placement="right"
-                        >
-                            <div
-                                className={cns(styles.chord, {
-                                    [styles.active]: isEqual(triad, selectedChord),
-                                })}
-                                onClick={onSelect.bind(this, triad)}
-                            >
-                                <span className={styles.chordNotes}>{triad.join(' - ')}</span>
-                                is
-                                <span>
-                                    {triad[0]}
-                                    {triadName && triadName.type}
-                                </span>
-                            </div>
-                        </Tooltip>
+                        <TooltipProvider key={index}>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <div
+                                        className={cns(styles.chord, {
+                                            [styles.active]: isEqual(triad, selectedChord),
+                                        })}
+                                        onClick={onSelect.bind(this, triad)}
+                                    >
+                                        <span className={styles.chordNotes}>{triad.join(' - ')}</span>
+                                        is
+                                        <span>
+                                            {triad[0]}
+                                            {triadName && triadName.type}
+                                        </span>
+                                    </div>
+                                </TooltipTrigger>
+                                {triadName && triadName.keys && (
+                                    <TooltipContent side="right">
+                                        {triadName.keys.join(' - ')}
+                                    </TooltipContent>
+                                )}
+                            </Tooltip>
+                        </TooltipProvider>
                     );
                 })}
         </div>

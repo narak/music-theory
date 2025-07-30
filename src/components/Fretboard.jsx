@@ -1,4 +1,4 @@
-import styles from './fretboard.cssm';
+import styles from './fretboard.module.css';
 
 import React from 'react';
 import cns from 'classnames';

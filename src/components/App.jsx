@@ -1,9 +1,13 @@
-import styles from './app.cssm';
+import styles from './app.module.css';
 
-import { hot } from 'react-hot-loader/root';
 import React, { Fragment } from 'react';
 
-import { Select, Radio, Card, Spin, Tag } from 'antd';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { RadioGroup, RadioGroupItem } from './ui/radio-group';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Spinner } from './ui/spinner';
+import { Badge } from './ui/badge';
+import { Label } from './ui/label';
 
 import { Notes, Tunings, TuningLabel } from '../constants/NoteConstants';
 import { ScaleType, ScaleTypeLabel } from '../constants/ScaleConstants';
@@ -96,25 +100,30 @@ class App extends React.Component {
             <div className={styles.app}>
                 <section className={styles.scaleSelector}>
                     <Select
-                        name="scaleKey"
                         value={scaleKey}
-                        onChange={this.onChangeScaleKey}
+                        onValueChange={this.onChangeScaleKey}
                         data-tour="scale-key-selector"
                     >
-                        {Notes.map(note => (
-                            <Option value={note} key={note}>
-                                {note}
-                            </Option>
-                        ))}
+                        <SelectTrigger>
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {Notes.map(note => (
+                                <SelectItem value={note} key={note}>
+                                    {note}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
                     </Select>
                     <div data-tour="scale-type-selector">
-                        <Radio.Group name="scaleType" onChange={this.onChange} value={scaleType}>
+                        <RadioGroup value={scaleType} onValueChange={this.onChangeScaleType}>
                             {Object.keys(ScaleTypeLabel).map(type => (
-                                <Radio key={type} value={type}>
-                                    {ScaleTypeLabel[type]}
-                                </Radio>
+                                <div key={type} className="flex items-center space-x-2">
+                                    <RadioGroupItem value={type} id={type} />
+                                    <Label htmlFor={type}>{ScaleTypeLabel[type]}</Label>
+                                </div>
                             ))}
-                        </Radio.Group>
+                        </RadioGroup>
                     </div>
                     <div className={styles.center} data-tour="take-a-tour">
                         <TextButton type="button" onClick={this.onStartTour}>
@@ -126,21 +135,22 @@ class App extends React.Component {
                             notesToFindFor.length > 2 ? (
                                 findingScales ? (
                                     <Fragment>
-                                        Finding scales <Spin size="small" />
+                                        Finding scales <Spinner size="small" />
                                     </Fragment>
                                 ) : foundScales && foundScales.length ? (
                                     <Fragment>
                                         {foundScales.map(({ key, type }, index) => (
-                                            <Tag
+                                            <Badge
                                                 key={index}
                                                 onClick={this.onChangeScale.bind(this, {
                                                     key,
                                                     type,
                                                 })}
-                                                color={type === ScaleType.MAJOR ? 'blue' : 'cyan'}
+                                                variant={type === ScaleType.MAJOR ? 'default' : 'secondary'}
+                                                className="cursor-pointer hover:opacity-80 mr-1 mb-1"
                                             >
                                                 {key} {ScaleTypeLabel[type]}
-                                            </Tag>
+                                            </Badge>
                                         ))}
                                         <br />
                                         <TextButton
@@ -179,16 +189,20 @@ class App extends React.Component {
                 <section data-tour="fretboard">
                     <strong>Fretboard</strong>
                     <Select
-                        name="tuning"
                         value={tuning}
-                        onChange={this.onChangeTuning}
+                        onValueChange={this.onChangeTuning}
                         className={styles.tunings}
                     >
-                        {Tunings.map(tuning => (
-                            <Option value={tuning} key={tuning}>
-                                {TuningLabel[tuning]}
-                            </Option>
-                        ))}
+                        <SelectTrigger>
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {Tunings.map(tuning => (
+                                <SelectItem value={tuning} key={tuning}>
+                                    {TuningLabel[tuning]}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
                     </Select>
                     <div className={styles.scroll}>
                         <Fretboard
@@ -205,19 +219,29 @@ class App extends React.Component {
                         <strong>Chords</strong>
                         <div className={styles.scroll}>
                             <div className={styles.info}>
-                                <Card title="Triads" data-tour="triads">
-                                    <Triads
-                                        scale={scaleNotes}
-                                        selectedChord={chordNotes}
-                                        onSelect={this.noSelectChord}
-                                    />
+                                <Card data-tour="triads">
+                                    <CardHeader>
+                                        <CardTitle>Triads</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <Triads
+                                            scale={scaleNotes}
+                                            selectedChord={chordNotes}
+                                            onSelect={this.noSelectChord}
+                                        />
+                                    </CardContent>
                                 </Card>
-                                <Card title="7ths" data-tour="sevenths">
-                                    <Sevenths
-                                        scale={scaleNotes}
-                                        selectedChord={chordNotes}
-                                        onSelect={this.noSelectChord}
-                                    />
+                                <Card data-tour="sevenths">
+                                    <CardHeader>
+                                        <CardTitle>7ths</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <Sevenths
+                                            scale={scaleNotes}
+                                            selectedChord={chordNotes}
+                                            onSelect={this.noSelectChord}
+                                        />
+                                    </CardContent>
                                 </Card>
                             </div>
                         </div>
@@ -256,12 +280,12 @@ class App extends React.Component {
         this.setState({ scaleKey });
     };
 
-    onChangeTuning = tuning => {
-        this.setState({ tuning });
+    onChangeScaleType = scaleType => {
+        this.setState({ scaleType });
     };
 
-    onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+    onChangeTuning = tuning => {
+        this.setState({ tuning });
     };
 
     onChangeScale = ({ key, type }) => {
@@ -284,4 +308,4 @@ class App extends React.Component {
     };
 }
 
-export default hot(App);
+export default App;

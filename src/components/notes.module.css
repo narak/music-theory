@@ -1,5 +1,4 @@
-@value vars: '../vars.cssm';
-@value fretNoteSizes, base00, base01, base06, base07, base12, base13, base14, base15 from vars;
+@import '../vars.module.css';
 
 .notes {
     display: grid;
@@ -9,7 +8,7 @@
 }
 
 .notes25 {
-    grid-template-columns: fretNoteSizes;
+    grid-template-columns: var(--fretNoteSizes);
     font-size: 16px;
     min-width: 1200px;
 }
@@ -18,34 +17,34 @@
     text-align: center;
     line-height: 24px;
     background: white;
-    color: base01;
+    color: var(--base01);
     box-shadow: 0 0 1px #000;
 }
 
 .active {
-    border: 1px solid base07;
-    background: base07;
+    border: 1px solid var(--base07);
+    background: var(--base07);
 }
 
 .zeroFret {
-    background: base15;
+    background: var(--base15);
     border-right: 5px solid hsl(0, 59%, 40%);
     border-width: 0 5px 0 0;
 }
 
 .root {
-    border: 1px solid base13;
-    background: base13;
+    border: 1px solid var(--base13);
+    background: var(--base13);
     font-weight: 600;
 }
 
 .relative {
-    border: 1px solid base14;
-    background: base14;
+    border: 1px solid var(--base14);
+    background: var(--base14);
 }
 
 .highlight {
-    border: 1px solid base00;
+    border: 1px solid var(--base00);
 }
 
 .zeroFret,
@@ -60,17 +59,17 @@
 }
 
 .clickable:hover {
-    background: base07;
+    background: var(--base07);
 }
 
 .active.clickable:hover {
-    background: base06;
+    background: var(--base06);
 }
 
 .relative.clickable:hover {
-    background: base13;
+    background: var(--base13);
 }
 
 .root.clickable:hover {
-    background: base12;
+    background: var(--base12);
 }

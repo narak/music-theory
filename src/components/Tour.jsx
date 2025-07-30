@@ -1,4 +1,4 @@
-import styles from './tour.cssm';
+import styles from './tour.module.css';
 
 import React from 'react';
 import ReactTour from 'reactour';
