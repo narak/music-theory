@@ -39,7 +39,9 @@ export default function Sevenths({ scale, selectedChord, onSelect }) {
                                         })}
                                         onClick={onSelect.bind(this, seventh)}
                                     >
-                                        <span className={styles.chordNotes}>{seventh.join(' - ')}</span>
+                                        <span className={styles.chordNotes}>
+                                            {seventh.join(' - ')}
+                                        </span>
                                         is
                                         <span>
                                             {seventh[0]}

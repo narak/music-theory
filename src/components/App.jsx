@@ -134,9 +134,7 @@ class App extends React.Component {
                         {notesToFindFor ? (
                             notesToFindFor.length > 2 ? (
                                 findingScales ? (
-                                    <Fragment>
-                                        Finding scales...
-                                    </Fragment>
+                                    <Fragment>Finding scales...</Fragment>
                                 ) : foundScales && foundScales.length ? (
                                     <Fragment>
                                         {foundScales.map(({ key, type }, index) => (
@@ -146,7 +144,11 @@ class App extends React.Component {
                                                     key,
                                                     type,
                                                 })}
-                                                variant={type === ScaleType.MAJOR ? 'default' : 'secondary'}
+                                                variant={
+                                                    type === ScaleType.MAJOR
+                                                        ? 'default'
+                                                        : 'secondary'
+                                                }
                                                 className="cursor-pointer hover:opacity-80 mr-1 mb-1"
                                             >
                                                 {key} {ScaleTypeLabel[type]}

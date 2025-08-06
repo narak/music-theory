@@ -107,7 +107,7 @@ export function findScales(notes, callback) {
     findScaleRecurse(
         notes,
         _finderHandle => (finderHandle = _finderHandle),
-        (key, type) => matchedScales.push({key, type}),
+        (key, type) => matchedScales.push({ key, type }),
         () => callback(matchedScales)
     );
 

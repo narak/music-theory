@@ -2,13 +2,13 @@
  * Polyfill for requestIdleCallback
  */
 export default window.requestIdleCallback ||
-    function(handler) {
+    function (handler) {
         let startTime = Date.now();
 
-        return setTimeout(function() {
+        return setTimeout(function () {
             handler({
                 didTimeout: false,
-                timeRemaining: function() {
+                timeRemaining: function () {
                     return Math.max(0, 50.0 - (Date.now() - startTime));
                 },
             });

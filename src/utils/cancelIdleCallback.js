@@ -2,6 +2,6 @@
  * Polyfill for cancelIdleCallback
  */
 export default window.cancelIdleCallback ||
-    function(id) {
+    function (id) {
         clearTimeout(id);
     };

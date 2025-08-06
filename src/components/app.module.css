@@ -1,5 +1,5 @@
 /* importing colors */
-@import "../vars.module.css";
+@import '../vars.module.css';
 
 :global(html),
 :global(body) {

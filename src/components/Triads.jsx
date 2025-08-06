@@ -36,7 +36,9 @@ export default function Triads({ scale, selectedChord, onSelect }) {
                                         })}
                                         onClick={onSelect.bind(this, triad)}
                                     >
-                                        <span className={styles.chordNotes}>{triad.join(' - ')}</span>
+                                        <span className={styles.chordNotes}>
+                                            {triad.join(' - ')}
+                                        </span>
                                         is
                                         <span>
                                             {triad[0]}

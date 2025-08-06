@@ -29,7 +29,7 @@ export default function Fretboard({ tuning, ...props }) {
     const inlayMarkup = [];
     for (let fretIndex = 0; fretIndex < noteCount; fretIndex++) {
         let highlightedNumber = false;
-        
+
         if (DotFrets.indexOf(fretIndex) > -1) {
             highlightedNumber = true;
             inlayMarkup.push(
@@ -56,7 +56,11 @@ export default function Fretboard({ tuning, ...props }) {
         } else {
             inlayMarkup.push(<div key={fretIndex} />);
         }
-        fretNumMarkup.push(<div key={fretIndex} className={highlightedNumber && styles.highlightedNumber}>{fretIndex}</div>);
+        fretNumMarkup.push(
+            <div key={fretIndex} className={highlightedNumber && styles.highlightedNumber}>
+                {fretIndex}
+            </div>
+        );
     }
 
     return (
