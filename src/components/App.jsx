@@ -1,11 +1,11 @@
 import styles from './app.module.css';
 
 import React, { Fragment } from 'react';
+import cns from 'classnames';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Spinner } from './ui/spinner';
 import { Badge } from './ui/badge';
 import { Label } from './ui/label';
 
@@ -135,7 +135,7 @@ class App extends React.Component {
                             notesToFindFor.length > 2 ? (
                                 findingScales ? (
                                     <Fragment>
-                                        Finding scales <Spinner size="small" />
+                                        Finding scales...
                                     </Fragment>
                                 ) : foundScales && foundScales.length ? (
                                     <Fragment>
@@ -217,33 +217,31 @@ class App extends React.Component {
                 <section data-tour="chords-container">
                     <section>
                         <strong>Chords</strong>
-                        <div className={styles.scroll}>
-                            <div className={styles.info}>
-                                <Card data-tour="triads">
-                                    <CardHeader>
-                                        <CardTitle>Triads</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <Triads
-                                            scale={scaleNotes}
-                                            selectedChord={chordNotes}
-                                            onSelect={this.noSelectChord}
-                                        />
-                                    </CardContent>
-                                </Card>
-                                <Card data-tour="sevenths">
-                                    <CardHeader>
-                                        <CardTitle>7ths</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <Sevenths
-                                            scale={scaleNotes}
-                                            selectedChord={chordNotes}
-                                            onSelect={this.noSelectChord}
-                                        />
-                                    </CardContent>
-                                </Card>
-                            </div>
+                        <div className="flex gap-6">
+                            <Card data-tour="triads">
+                                <CardHeader>
+                                    <CardTitle>Triads</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <Triads
+                                        scale={scaleNotes}
+                                        selectedChord={chordNotes}
+                                        onSelect={this.noSelectChord}
+                                    />
+                                </CardContent>
+                            </Card>
+                            <Card data-tour="sevenths">
+                                <CardHeader>
+                                    <CardTitle>7ths</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <Sevenths
+                                        scale={scaleNotes}
+                                        selectedChord={chordNotes}
+                                        onSelect={this.noSelectChord}
+                                    />
+                                </CardContent>
+                            </Card>
                         </div>
                     </section>
                 </section>

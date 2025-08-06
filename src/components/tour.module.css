@@ -6,9 +6,9 @@
 }
 
 .button:hover {
-    background: hsl(228, 90%, 95%);
+    background: var(--base06);
 }
 
 .button:active {
-    background: hsl(228, 90%, 90%);
+    background: var(--base05);
 }

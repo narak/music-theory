@@ -18,33 +18,36 @@
     line-height: 24px;
     background: white;
     color: var(--base01);
-    box-shadow: 0 0 1px #000;
+    box-shadow: 0 0 1px var(--base00);
 }
 
 .active {
-    border: 1px solid var(--base07);
-    background: var(--base07);
+    border: 1px solid var(--base11);
+    background: var(--base11);
 }
 
 .zeroFret {
     background: var(--base15);
+    color: var(--base06);
     border-right: 5px solid hsl(0, 59%, 40%);
     border-width: 0 5px 0 0;
 }
 
 .root {
-    border: 1px solid var(--base13);
-    background: var(--base13);
+    text-decoration: underline;
     font-weight: 600;
+    border: 1px solid var(--base07);
+    background: var(--base07);
+    color: var(--base01);
 }
 
 .relative {
-    border: 1px solid var(--base14);
-    background: var(--base14);
+    border: 1px solid var(--base12);
+    background: var(--base12);
 }
 
 .highlight {
-    border: 1px solid var(--base00);
+    box-shadow: inset 0 0 4px 2px var(--base02);
 }
 
 .zeroFret,
@@ -59,11 +62,11 @@
 }
 
 .clickable:hover {
-    background: var(--base07);
+    background: var(--base05);
 }
 
 .active.clickable:hover {
-    background: var(--base06);
+    background: var(--base05);
 }
 
 .relative.clickable:hover {

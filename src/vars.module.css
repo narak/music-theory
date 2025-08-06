@@ -1,19 +1,25 @@
 :root {
-  --base00: #1B2B34;
-  --base01: #343D46;
-  --base02: #4F5B66;
-  --base03: #65737E;
-  --base04: #A7ADBA;
-  --base05: #C0C5CE;
-  --base06: #CDD3DE;
-  --base07: #D8DEE9;
-  --base08: #EC5f67;
-  --base09: #F99157;
-  --base10: #FAC863;
-  --base11: #99C794;
-  --base12: #5FB3B3;
-  --base13: #6699CC;
-  --base14: #C594C5;
-  --base15: #AB7967;
+  /* Vintage-inspired foundations based on your palette */
+  --base00: #2A363B;        /* Deep teal-gray (darkest from your palette) */
+  --base01: #3a4a50;        /* Slightly lighter teal-gray for text */
+  --base02: #4a5a60;        /* Medium teal-gray for borders */
+  --base03: #6a7a80;        /* Light teal-gray for secondary text */
+  
+  /* Light foundations */
+  --base04: #8a9a9f;        /* Medium light gray */
+  --base05: #aabab0;        /* Light gray with hint of green */
+  --base06: #e8d8c8;        /* Very light cream */
+  --base07: #FECEAB;        /* Warm cream (from your palette) */
+  
+  /* Your beautiful vintage palette */
+  --base08: #E84A5F;        /* Coral red - for root notes (from your palette) */
+  --base09: #FF847C;        /* Soft coral - for emphasis (from your palette) */
+  --base10: #ffb4a0;        /* Light coral - for highlighted states */
+  --base11: #99B898;        /* Sage green - for active states (from your palette) */
+  --base12: #7aa899;        /* Deeper sage - for interactive elements */
+  --base13: #b8a898;        /* Warm beige - for relative notes */
+  --base14: #d4a574;        /* Warm tan - for chord relationships */
+  --base15: #2A363B;        /* Deep teal-gray - for structure (from your palette) */
+  
   --fretNoteSizes: .6fr repeat(11, 1fr) repeat(5, .8fr) repeat(8, .6fr);
 }

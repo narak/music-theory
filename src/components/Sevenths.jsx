@@ -34,7 +34,7 @@ export default function Sevenths({ scale, selectedChord, onSelect }) {
                             <Tooltip>
                                 <TooltipTrigger asChild>
                                     <div
-                                        className={cns(styles.chord, styles.chordSeventh, {
+                                        className={cns(styles.chord, 'flex gap-2 px-2', {
                                             [styles.active]: isEqual(seventh, selectedChord),
                                         })}
                                         onClick={onSelect.bind(this, seventh)}

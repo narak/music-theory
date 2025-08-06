@@ -3,6 +3,7 @@ import keyMirror from '../utils/keyMirror';
 export const Notes = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
 
 export const Tunings = keyMirror(
+    'E4',
     'E',
     'Eb',
     'DropD',
@@ -16,6 +17,7 @@ export const Tunings = keyMirror(
 );
 
 export const TuningLabel = {
+    [Tunings.E4]: 'E 4ths',
     [Tunings.E]: 'E',
     [Tunings.Eb]: 'Eb / D#',
     [Tunings.DropD]: 'Drop D',
@@ -29,6 +31,7 @@ export const TuningLabel = {
 };
 
 export const TuningNotes = {
+    [Tunings.E4]: ['E', 'A', 'D', 'G', 'C', 'F'],
     [Tunings.E]: ['E', 'A', 'D', 'G', 'B', 'E'],
     [Tunings.Eb]: ['Eb', 'Ab', 'C#', 'F#', 'Bb', 'Eb'],
     [Tunings.DropD]: ['D', 'A', 'D', 'G', 'B', 'E'],

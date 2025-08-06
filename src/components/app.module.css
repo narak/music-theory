@@ -3,15 +3,11 @@
 
 :global(html),
 :global(body) {
+    font-family: 'Montserrat', serif;
+    background: var(--base06);
+    color: var(--base01);
     margin: 0;
     padding: 0;
-    /* background: var(--base00); */
-    font-family: 'Montserrat', serif;
-}
-
-:global(*),
-:global(* *) {
-    box-sizing: border-box;
 }
 
 .app {
@@ -19,14 +15,11 @@
     grid-gap: 1.2rem;
     margin: 1rem;
     padding: 1rem;
+    background: var(--base06);
+    min-height: 100vh;
 }
 
-.scroll {
-    max-width: 100%;
-    overflow: auto;
-}
-
-/* .scaleSelector {
+.scaleSelector {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr 3fr;
     align-items: center;
@@ -36,7 +29,7 @@
 
 .center {
     text-align: center;
-} */
+}
 
 .scaleFinder {
     text-align: right;
@@ -49,12 +42,6 @@
 .tunings {
     width: 200px;
     margin-left: 1rem;
-}
-
-.info {
-    display: grid;
-    grid-template-columns: 235px 365px 1fr;
-    grid-gap: 10px;
 }
 
 @media only screen and (max-width: 800px) {

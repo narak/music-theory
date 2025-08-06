@@ -28,9 +28,10 @@ export default function Fretboard({ tuning, ...props }) {
     const fretNumMarkup = [];
     const inlayMarkup = [];
     for (let fretIndex = 0; fretIndex < noteCount; fretIndex++) {
-        fretNumMarkup.push(<div key={fretIndex}>{fretIndex}</div>);
-
+        let highlightedNumber = false;
+        
         if (DotFrets.indexOf(fretIndex) > -1) {
+            highlightedNumber = true;
             inlayMarkup.push(
                 <div
                     key={fretIndex}
@@ -40,6 +41,7 @@ export default function Fretboard({ tuning, ...props }) {
                 />
             );
         } else if (DoubleDotFrets.indexOf(fretIndex) > -1) {
+            highlightedNumber = true;
             inlayMarkup.push(
                 <div
                     key={fretIndex}
@@ -54,26 +56,27 @@ export default function Fretboard({ tuning, ...props }) {
         } else {
             inlayMarkup.push(<div key={fretIndex} />);
         }
+        fretNumMarkup.push(<div key={fretIndex} className={highlightedNumber && styles.highlightedNumber}>{fretIndex}</div>);
     }
 
     return (
-        <div>
+        <>
             <div className={styles.numbers}>{fretNumMarkup}</div>
-
-            {TuningNotes[tuning]
-                .slice()
-                .reverse()
-                .map((note, index) => (
-                    <NotesComponent
-                        key={index}
-                        notes={getStringNotes(note)}
-                        zeroFret={true}
-                        noteCount={noteCount}
-                        {...props}
-                    />
-                ))}
-
+            <div className={styles.fretboard}>
+                {TuningNotes[tuning]
+                    .slice()
+                    .reverse()
+                    .map((note, index) => (
+                        <NotesComponent
+                            key={index}
+                            notes={getStringNotes(note)}
+                            zeroFret={true}
+                            noteCount={noteCount}
+                            {...props}
+                        />
+                    ))}
+            </div>
             <div className={styles.inlays}>{inlayMarkup}</div>
-        </div>
+        </>
     );
 }

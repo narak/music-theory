@@ -3,16 +3,16 @@ import styled from 'styled-components';
 export default styled.button`
     background: none;
     border: none;
-    color: hsl(228, 90%, 70%);
+    color: var(--base13);
     font-weight: 600;
     font-size: 12px;
     cursor: pointer;
 
     &:hover {
-        color: hsl(228, 90%, 65%);
+        color: var(--base12);
     }
 
     &:active {
-        color: hsl(228, 90%, 50%);
+        color: var(--base01);
     }
 `;
