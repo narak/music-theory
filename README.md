@@ -1,16 +1,21 @@
-# Music Theory Application
+# Music Theory Explorer 🎵
 
-A modern React application for learning music theory, featuring interactive fretboard visualization, scales, chords, and educational tours.
+A modern, interactive React application for learning music theory, featuring guitar fretboard visualization, scales, chords, and educational guided tours.
 
-## Features
+🌐 **[Live Demo](https://narak.github.io/music-theory/)**
 
-- Interactive guitar fretboard with note visualization
-- Scale and chord exploration
-- Educational guided tours
-- Responsive design with modern UI components
-- Dark theme support
+## ✨ Features
 
-## Tech Stack
+- 🎸 **Interactive Guitar Fretboard** - Visual note exploration across the neck
+- 🎼 **Scale & Mode Explorer** - Learn major, minor, and modal scales
+- 🎵 **Chord Builder** - Discover triads and seventh chords
+- 🧭 **Guided Tours** - Step-by-step learning experience
+- 🔍 **Scale Finder** - Identify scales from selected notes
+- 📱 **Responsive Design** - Works perfectly on mobile and desktop
+- 🌙 **Modern UI** - Clean, accessible interface with dark theme support
+- 💾 **Persistent Settings** - Your preferences are saved locally
+
+## 🛠️ Tech Stack
 
 - **React 18** - Modern React with concurrent features
 - **Vite** - Lightning fast build tool and dev server

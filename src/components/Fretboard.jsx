@@ -57,7 +57,7 @@ export default function Fretboard({ tuning, ...props }) {
             inlayMarkup.push(<div key={fretIndex} />);
         }
         fretNumMarkup.push(
-            <div key={fretIndex} className={highlightedNumber && styles.highlightedNumber}>
+            <div key={fretIndex} className={highlightedNumber ? styles.highlightedNumber : ''}>
                 {fretIndex}
             </div>
         );

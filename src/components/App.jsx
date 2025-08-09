@@ -20,6 +20,7 @@ import Fretboard from './Fretboard';
 import Triads from './Triads';
 import Sevenths from './Sevenths';
 import Tour from './Tour';
+import ModeExplorer from './ModeExplorer';
 import TextButton from './common/TextButton';
 
 const { Option } = Select;
@@ -246,6 +247,18 @@ class App extends React.Component {
                             </Card>
                         </div>
                     </section>
+                </section>
+                <section data-tour="mode-explorer">
+                    <strong>Mode Explorer</strong>
+                    <ModeExplorer
+                        scaleKey={scaleKey}
+                        scaleType={scaleType}
+                        scaleNotes={scaleNotes}
+                        onChangeScale={this.onChangeScale}
+                        onToggleNote={this.onToggleNote}
+                        highlightedNotes={chordNotes || selectedNotes}
+                        onClearSelectedNotes={this.onClearSelectedNotes}
+                    />
                 </section>
                 <Tour isOpen={this.state.showingTour} onStopTour={this.onStopTour} />
             </div>

@@ -1,0 +1,153 @@
+.threeNotesContainer {
+    margin: 1rem 0;
+}
+
+.controls {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.patternsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.patternContainer {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+    background: #fafafa;
+}
+
+.patternHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.position {
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+.fretboard {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    background: #8b4513;
+    padding: 8px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.string {
+    display: flex;
+    gap: 1px;
+    height: 24px;
+    background: #c0c0c0;
+    border-radius: 1px;
+    position: relative;
+    align-items: center;
+}
+
+.stringLabel {
+    width: 30px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    background: #374151;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px 0 0 2px;
+}
+
+.fret {
+    width: 45px;
+    height: 100%;
+    background: transparent;
+    border-right: 1px solid #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.fret:first-child {
+    border-left: 3px solid #333;
+}
+
+.fretNumber {
+    position: absolute;
+    top: -20px;
+    font-size: 10px;
+    color: #666;
+}
+
+.patternNote {
+    background: #3b82f6;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px white;
+}
+
+.rootNote {
+    background: #dc2626 !important;
+    box-shadow:
+        0 0 0 2px #fff,
+        0 0 0 4px #dc2626;
+}
+
+.inScale {
+    opacity: 1;
+}
+
+.noteLabel {
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.legend {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.legendColor {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fret {
+        width: 35px;
+    }
+
+    .stringLabel {
+        width: 25px;
+        font-size: 10px;
+    }
+}

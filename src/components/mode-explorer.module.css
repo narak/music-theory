@@ -1,0 +1,217 @@
+.modeExplorer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.controlsCard {
+    margin-bottom: 1rem;
+}
+
+.controls {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.modeContent {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+}
+
+.modeCard {
+    border: 2px solid #e2e8f0;
+}
+
+.modeTitle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.modeBadge {
+    font-size: 0.875rem;
+}
+
+.modeContent {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.notesSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.notesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.noteItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 60px;
+}
+
+.noteItem:hover {
+    background: #f1f5f9;
+    transform: translateY(-1px);
+}
+
+.noteItem.characteristic {
+    border-color: #f59e0b;
+    background: #fef3c7;
+}
+
+.noteItem.root {
+    border-color: #dc2626;
+    background: #fee2e2;
+    font-weight: bold;
+}
+
+.noteName {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.interval {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+.characteristicsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.characteristic {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.characteristic p {
+    margin: 0;
+    color: #4b5563;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.chordsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.chordBadge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.comparisonCard {
+    border: 2px solid #3b82f6;
+}
+
+.comparisonTable {
+    display: grid;
+    grid-template-columns: 60px 1fr 1fr 1fr;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.comparisonHeader {
+    display: contents;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.comparisonHeader > div {
+    padding: 0.75rem 0.5rem;
+    background: #f8fafc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.comparisonRow {
+    display: contents;
+}
+
+.comparisonRow > div {
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.degree {
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.majorNote {
+    color: #374151;
+}
+
+.modeNote {
+    color: #374151;
+    font-weight: 500;
+}
+
+.modeNote.different {
+    color: #dc2626;
+    font-weight: bold;
+    background: #fee2e2;
+    border-radius: 4px;
+}
+
+.difference {
+    color: #059669;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .modeContent {
+        grid-template-columns: 1fr;
+    }
+
+    .modeTitle {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .comparisonTable {
+        grid-template-columns: 50px 1fr 1fr 80px;
+        gap: 0.25rem;
+    }
+
+    .comparisonHeader > div,
+    .comparisonRow > div {
+        padding: 0.25rem;
+        font-size: 0.75rem;
+    }
+}
